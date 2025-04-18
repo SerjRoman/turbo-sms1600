@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { TextInputProps, TextStyle } from "react-native";
+import { TextInputProps, TextStyle, ViewStyle } from "react-native";
 
 {/* <Input 
     placeholder,
@@ -19,9 +19,12 @@ import { TextInputProps, TextStyle } from "react-native";
 // container
 
 export interface IInputProps extends TextInputProps{
-    placeholder: string,
-    iconLeft?:ReactNode ,
-    iconRight?: ReactNode,
-    inputStyles: TextStyle,
+    placeholder: string
+    value: string
+    onChangeText: (text: string) => void
+    iconLeft?:ReactNode 
+    iconRight?: ReactNode
+    inputStyles: TextStyle
+    containerStyle: ViewStyle
 }
     
