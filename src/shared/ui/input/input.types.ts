@@ -22,6 +22,7 @@ export interface IInputProps extends TextInputProps{
     placeholder: string,
     iconLeft?:ReactNode ,
     iconRight?: ReactNode,
-    inputStyles: TextStyle,
+    inputStyles?: TextStyle,
+    label?: string,
 }
     
