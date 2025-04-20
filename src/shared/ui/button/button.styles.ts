@@ -7,11 +7,11 @@ export const styles = StyleSheet.create({
 		borderRadius: 16,
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: COLORS.bisquePrimary,
+		backgroundColor: COLORS.bisqueSecondary,
 	},
     disabled: {
         borderWidth: 2,
-        borderColor: COLORS.bisqueSecondary,
+        borderColor: COLORS.bisquePrimary,
         opacity: 0.5,
     }
 });

@@ -1,6 +1,7 @@
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, TouchableWithoutFeedback, View } from "react-native";
 import { IInputProps } from "./input.types";
 import { styles } from "./input.styles";
+
 
 export function Input({
 	label,
