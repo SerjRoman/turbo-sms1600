@@ -1,14 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { Button } from "../shared/ui/button";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Input } from "../shared/ui/input";
+import { Providers } from "./Providers";
+import { LoginForm } from "../modules/auth/ui";
 
 export default function App() {
 	return (
-		<SafeAreaView>
-			<StatusBar style="auto" />
-			<Button label="Submit" disabled={true}/>
-            <Input placeholder="Name" label="Name"/>
-		</SafeAreaView>
+		<Providers>
+			<SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+				<StatusBar style="auto" />
+				<LoginForm/>
+			</SafeAreaView>
+		</Providers>
 	);
 }

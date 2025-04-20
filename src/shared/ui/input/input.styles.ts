@@ -1,25 +1,29 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../constats/";
+
 export const styles = StyleSheet.create({
-    input: {
-        width: 349,
-        height: 60,//хз какую брать, там разные
-        borderRadius: 16,
-        borderBottomWidth:1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: COLORS.bisquePrimary,
-    },
-    withIconLeft: {
-
-    },
-    withIconRight: {
-
-    },
-    label: {
-        color: "black",
-        fontWeight:500,
-        justifyContent: "center",
-        alignItems: "center"
-    }
+	inputBox: {
+		height: 60,
+		flexDirection: "row",
+		alignItems: "center",
+		paddingHorizontal: 10,
+		borderRadius: 16,
+		backgroundColor: COLORS.bisquePrimary,
+		borderWidth: 1,
+		borderColor: COLORS.black,
+	},
+	input: {},
+	label: {
+		fontWeight: 500,
+		fontSize: 16,
+	},
+	errorBox: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 2,
+	},
+	errMsg: {
+		color: COLORS.error,
+		fontSize: 16,
+	},
 });
