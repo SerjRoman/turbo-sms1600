@@ -2,17 +2,28 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "../../constats/";
 
 export const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",  
-        alignItems: "center",  
-        borderWidth: 3,       
-        borderRadius: 16,       
-        backgroundColor: COLORS.bisquePrimary,
-        width:350
-    },
-    input: {
-        flex: 1,               
-        fontSize: 16,
-        backgroundColor: COLORS.bisquePrimary,
-    }
-  })
+	inputBox: {
+		height: 60,
+		flexDirection: "row",
+		alignItems: "center",
+		paddingHorizontal: 10,
+		borderRadius: 16,
+		backgroundColor: COLORS.bisquePrimary,
+		borderWidth: 1,
+		borderColor: COLORS.black,
+	},
+	input: {},
+	label: {
+		fontWeight: 500,
+		fontSize: 16,
+	},
+	errorBox: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 2,
+	},
+	errMsg: {
+		color: COLORS.error,
+		fontSize: 16,
+	},
+});

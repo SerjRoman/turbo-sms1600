@@ -18,13 +18,12 @@ import { TextInputProps, TextStyle, ViewStyle } from "react-native";
 
 // container
 
-export interface IInputProps extends TextInputProps{
-    placeholder: string
-    value: string
-    onChangeText: (text: string) => void
-    iconLeft?:ReactNode 
-    iconRight?: ReactNode
-    inputStyles: TextStyle
-    containerStyle: ViewStyle
+export interface IInputProps extends TextInputProps {
+    iconLeft?: ReactNode,
+    iconRight?: ReactNode,
+    inputStyles?: TextStyle,
+    containerStyles?: ViewStyle
+    errMsg?: string;
+    label?: string
 }
-    
+
