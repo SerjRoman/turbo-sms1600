@@ -7,6 +7,3 @@ export function EmailIcon(props: SvgProps) {
 		</Svg>
 	);
 }
-
-
-export default EmailIcon;
