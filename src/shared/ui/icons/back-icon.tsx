@@ -1,5 +1,5 @@
 import Svg, { Path, SvgProps } from "react-native-svg"
-//                   ＼（〇_ｏ）／
+
 export function BackIcon(props: SvgProps) {
     return (
         <Svg viewBox="0 0 16 16" {...props} >
