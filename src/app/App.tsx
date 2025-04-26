@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Providers } from "./Providers";
-import { LoginForm, RegisterForm } from "../modules/auth/ui";
-import { useState } from "react";
+import { LoginForm } from "../modules/auth/ui";
+import { WelcomeBlock } from "../modules/auth/ui";
 
 export default function App() {
 	const [textValue, setTextValue] = useState("")
@@ -10,7 +10,8 @@ export default function App() {
 		<Providers>
 			<SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
 				<StatusBar style="auto" />
-				<RegisterForm/>
+				<WelcomeBlock />
+				<LoginForm />
 			</SafeAreaView>
 		</Providers>
 	);

@@ -7,6 +7,7 @@ import { SearchIcon } from "./search-icon";
 import { UserIcon } from "./user-icon";
 import { ChatsIcon } from "./chats-icon";
 import { ContactsIcon } from "./contacts-icon";
+import { EyeSlashIcon } from "./eye-slash-icon";
 import { EmailIcon } from "./email-icon";
 /*
 1. копіюємо свгшки із фігми
@@ -26,6 +27,7 @@ export const ICONS = {
 	SearchIcon,
 	UserIcon,
 	ErrorIcon,
+	ContactsIcon,
 	EmailIcon,
-    ContactsIcon
+	EyeSlashIcon,
 };

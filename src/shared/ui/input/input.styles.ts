@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../constats/";
+import { COLORS } from "../../constants";
 
 export const styles = StyleSheet.create({
 	inputBox: {
@@ -12,7 +12,10 @@ export const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: COLORS.black,
 	},
-	input: {},
+	input: {
+        flex: 1,
+        height: '100%'
+    },
 	label: {
 		fontWeight: 500,
 		fontSize: 16,
