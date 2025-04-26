@@ -1,25 +1,32 @@
-import { FontWeight } from './../../../../node_modules/lightningcss/node/ast.d';
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../constats";
+import { COLORS } from "../../constants";
 
 export const styles = StyleSheet.create({
-    inputView: {
-        flexDirection: "row",
-        alignItems: "center",
-        borderWidth: 1,
-        backgroundColor: COLORS.bisqueSecondary,
-        height: 60,
-        borderRadius: 16,
-        gap: 10
+	inputBox: {
+		height: 60,
+		flexDirection: "row",
+		alignItems: "center",
+		paddingHorizontal: 10,
+		borderRadius: 16,
+		backgroundColor: COLORS.bisquePrimary,
+		borderWidth: 1,
+		borderColor: COLORS.black,
+	},
+	input: {
+        flex: 1,
+        height: '100%'
     },
-    iconLeft: {
-        paddingLeft: 5,
-    },
-    iconRight: {
-        paddingRight: 5,
-    },
-    label: {
-        fontWeight: 500,
-        fontSize: 16,
-    }
-})
+	label: {
+		fontWeight: 500,
+		fontSize: 16,
+	},
+	errorBox: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 2,
+	},
+	errMsg: {
+		color: COLORS.error,
+		fontSize: 16,
+	},
+});
