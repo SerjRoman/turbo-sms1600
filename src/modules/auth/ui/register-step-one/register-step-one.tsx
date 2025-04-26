@@ -4,26 +4,34 @@ import { ICONS } from "../../../../shared/ui/icons";
 import { Button } from "../../../../shared/ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { IRegister } from "../../types";
+import { styles } from "./register-step-one.styles";
 
-export function RegisterForm() {
+export function RegisterStepOne() {
 	const { handleSubmit, control } = useForm<IRegister>({
 		defaultValues: {
 			email: "",
 			username: "",
 			password: "",
-			reTypePassword: "",
+			confirmPassword: "",
 		},
 	});
 	function onSubmit(data: IRegister) {
+        
 		console.log(data);
 	}
 
 	return (
-		<View>
-			<View style={{ gap: 10 }}>
+		<View style={styles.container}>
+			<View style={styles.form}>
 				<Controller
 					control={control}
 					name="email"
+                    rules={{
+						required: {
+							value: true,
+							message: "Email is required"
+						}
+					}}
 					render={({ field, fieldState }) => {
 						return (
 							<Input
@@ -36,6 +44,7 @@ export function RegisterForm() {
 								value={field.value}
 								label="Email"
 								autoCorrect={false}
+                                errMsg={fieldState.error?.message}
 							/>
 						);
 					}}
@@ -43,6 +52,12 @@ export function RegisterForm() {
 				<Controller
 					control={control}
 					name="username"
+                    rules={{
+						required: {
+							value: true,
+							message: "Username is required"
+						}
+					}}
 					render={({ field, fieldState }) => {
 						return (
 							<Input
@@ -55,63 +70,62 @@ export function RegisterForm() {
 								value={field.value}
 								label="Username"
 								autoCorrect={false}
+                                errMsg={fieldState.error?.message}
 							/>
 						);
 					}}
 				/>
 				<Controller
 					control={control}
+                    rules={{
+						required: {
+							value: true,
+							message: "Password is required"
+						}
+					}}
 					name="password"
 					render={({ field, fieldState }) => {
 						return (
-							<Input
+							<Input.Password
 								placeholder="Password"
-								iconLeft={
-									<ICONS.KeyIcon width={30} height={30} />
-								}
-								iconRight={
-									<ICONS.EyeIcon width={30} height={30} />
-								}
 								onChange={field.onChange}
 								onChangeText={field.onChange}
 								value={field.value}
 								label="Password"
 								autoCorrect={false}
+								errMsg={fieldState.error?.message}
 							/>
 						);
 					}}
 				/>
 				<Controller
 					control={control}
-					name="reTypePassword"
+                    rules={{
+						required: {
+							value: true,
+							message: "Password is required"
+						}
+					}}
+					name="confirmPassword"
 					render={({ field, fieldState }) => {
 						return (
-							<Input
-								placeholder="Re-type password"
-								iconLeft={
-									<ICONS.KeyIcon width={30} height={30} />
-								}
-								iconRight={
-									<ICONS.EyeIcon width={30} height={30} />
-								}
+							<Input.Password
+								placeholder="Confirm password"
 								onChange={field.onChange}
 								onChangeText={field.onChange}
 								value={field.value}
-								label="Re-type password"
+								label="Confirm password"
 								autoCorrect={false}
+								errMsg={fieldState.error?.message}
 							/>
 						);
 					}}
 				/>
 			</View>
 			<View
-				style={{
-					justifyContent: "center",
-					alignItems: "center",
-					paddingTop: 35,
-				}}
+				style={styles.buttonBlock}
 			>
-				<Button label="Register" onPress={handleSubmit(onSubmit)} />
+				<Button label="Next" onPress={handleSubmit(onSubmit)} />
 			</View>
 		</View>
 	);
