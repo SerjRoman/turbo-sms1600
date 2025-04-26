@@ -13,11 +13,11 @@ export const styles = StyleSheet.create({
         
     },
     defaultText: {
-        fontSize: 24,
+        fontSize: 16,
         color: COLORS.grey
     },
     linkText: {
-        fontSize: 24,
+        fontSize: 16,
         color: COLORS.brownPrimaryLight
     }
     

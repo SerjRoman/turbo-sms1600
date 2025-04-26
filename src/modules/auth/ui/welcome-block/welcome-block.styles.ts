@@ -3,7 +3,7 @@ import { COLORS } from "../../../../shared/constants";
 
 export const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		flex: 0.5,
 		alignItems: "center",
 		justifyContent: "center",
 	},
