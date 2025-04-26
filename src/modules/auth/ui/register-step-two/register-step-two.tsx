@@ -65,9 +65,9 @@ export function RegisterStepTwo() {
 					}}
 				/>
 			</View>
-            <View>
+            <View style={styles.imageForm}>
                 {/* <SetImage/> */}
-                <Text>Upload photo</Text>
+                <Text style={styles.photoText}>Upload photo</Text>
             </View>
 			<View style={styles.buttonBlock}>
 				<Button label="Register" onPress={handleSubmit(onSubmit)} />

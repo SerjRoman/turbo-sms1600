@@ -16,10 +16,15 @@ export const styles = StyleSheet.create({
 	},
 
 	form: {
-		gap: 10,
+		gap: 20,
 		padding: 20,
 	},
-
+    imageForm:{
+        alignItems:"center"
+    },
+    photoText:{
+        fontWeight:500
+    },
 	buttonBlock: {
 		alignSelf: "center",
 	},
