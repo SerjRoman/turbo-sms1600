@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../constats/";
+import { COLORS } from "../../constants";
 export const styles = StyleSheet.create({
 	button: {
 		width: 150,
@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: COLORS.bisqueSecondary,
 	},
-    disabled: {
-        borderWidth: 2,
-        borderColor: COLORS.bisquePrimary,
-        opacity: 0.5,
-    }
+	disabled: {
+		borderWidth: 2,
+		borderColor: COLORS.bisqueSecondary,
+		opacity: 0.5,
+	},
 });

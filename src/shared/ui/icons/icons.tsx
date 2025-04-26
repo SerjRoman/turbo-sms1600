@@ -7,8 +7,8 @@ import { SearchIcon } from "./search-icon";
 import { UserIcon } from "./user-icon";
 import { ChatsIcon } from "./chats-icon";
 import { ContactsIcon } from "./contacts-icon";
-import { EmailIcon } from "./email-icon";
 import { EyeSlashIcon } from "./eye-slash-icon";
+import { EmailIcon } from "./email-icon";
 /*
 1. копіюємо свгшки із фігми
 2. вставляємо те що скопіювали у прекрасний сайт https://transform.tools/svg-to-react-native
@@ -30,4 +30,5 @@ export const ICONS = {
 	ErrorIcon,
 	ContactsIcon,
 	EmailIcon,
+	EyeSlashIcon,
 };

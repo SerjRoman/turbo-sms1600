@@ -4,6 +4,7 @@ import { ICONS } from "../../../../shared/ui/icons";
 import { Button } from "../../../../shared/ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { ILogin } from "../../types";
+import { styles } from "./login-form.styles";
 
 export function LoginForm() {
 	// задаем стандартное значение так как по умолчанию стоят undefinedы а нам нужны пустые строки для корректной работы onChange и onChangeText
@@ -14,14 +15,20 @@ export function LoginForm() {
 		console.log(data);
 	}
 	return (
-		<View>
-			<View>
+		<View style={styles.container}>
+			<View style={styles.form}>
 				{/* Контроллер специальный компонент, который позволяет контролировать нестандартные поля(теги html)*/}
 				<Controller
 					// для связи контроллера с юз форма
 					control={control}
 					// имя поля формы, взято из интерфейса
 					name="email"
+					rules={{
+						required: {
+							value: true,
+							message: "Email is required"
+						}
+					}}
 					// render - функция, которая описывает, как должно выглядеть поле
 					// field - это объект, который позволяет контролировать поле (связывает поле с формой)
 					render={({ field, fieldState }) => {
@@ -40,6 +47,7 @@ export function LoginForm() {
 								label="Email"
 								// отключает Т9
 								autoCorrect={false}
+								errMsg={fieldState.error?.message}
 							/>
 						);
 					}}
@@ -47,30 +55,30 @@ export function LoginForm() {
 				<Controller
 					control={control}
 					name="password"
+                    rules={{
+						required: {
+							value: true,
+							message: "Password is required"
+						}
+					}}
 					render={({ field, fieldState }) => {
 						return (
-							<Input
+							<Input.Password
 								placeholder="Password"
-								iconLeft={
-									<ICONS.KeyIcon width={30} height={30} />
-								}
-								iconRight={
-									<ICONS.EyeIcon width={30} height={30} />
-								}
 								onChange={field.onChange}
 								onChangeText={field.onChange}
 								value={field.value}
 								label="Password"
 								autoCorrect={false}
+								errMsg={fieldState.error?.message}
 							/>
 						);
 					}}
 				/>
 			</View>
-			<View>
+			<View style={styles.buttonBlock}>
 				<Button label="Login" onPress={handleSubmit(onSubmit)} />
 			</View>
 		</View>
 	);
 }
-// UwU

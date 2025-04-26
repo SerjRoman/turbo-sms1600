@@ -1,9 +1,10 @@
 import { Text, TextInput, TouchableWithoutFeedback, View } from "react-native";
 import { IInputProps } from "./input.types";
 import { styles } from "./input.styles";
+import { ICONS } from "../icons";
+import { useState } from "react";
 
-
-export function Input({
+function Input({
 	label,
 	errMsg,
 	iconLeft,
@@ -24,7 +25,7 @@ export function Input({
 			</View>
 			{errMsg && (
 				<View style={styles.errorBox}>
-					{/* <ErrorIcon /> */}
+					<ICONS.ErrorIcon width={16} height={16} />
 					<Text style={styles.errMsg}>{errMsg}</Text>
 				</View>
 			)}
@@ -32,4 +33,46 @@ export function Input({
 	);
 }
 
-// Password
+function Password(props: Omit<IInputProps, "iconLeft" | "iconRight">) {
+	const { label, inputStyles, containerStyles, errMsg } = props;
+	const [isHidden, setIsHidden] = useState(true);
+
+	return (
+		<View>
+			{label && <Text style={styles.label}>{label}</Text>}
+			<View style={[styles.inputBox, containerStyles]}>
+				<View style={{ marginRight: 2 }}>
+					<ICONS.KeyIcon width={30} height={30} />
+				</View>
+				<TextInput
+					secureTextEntry={isHidden}
+					style={[inputStyles, styles.input]}
+					{...props}
+				/>
+				<View style={{ marginLeft: "auto" }}>
+					<TouchableWithoutFeedback
+						onPress={() => {
+							setIsHidden(!isHidden);
+						}}
+					>
+						{isHidden ? (
+							<ICONS.EyeSlashIcon width={30} height={30} />
+						) : (
+							<ICONS.EyeIcon width={30} height={30} />
+						)}
+					</TouchableWithoutFeedback>
+				</View>
+			</View>
+			{errMsg && (
+				<View style={styles.errorBox}>
+					<ICONS.ErrorIcon width={16} height={16} />
+					<Text style={styles.errMsg}>{errMsg}</Text>
+				</View>
+			)}
+		</View>
+	);
+}
+
+Input.Password = Password;
+
+export { Input };
