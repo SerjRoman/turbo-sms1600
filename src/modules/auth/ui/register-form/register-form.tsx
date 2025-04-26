@@ -4,6 +4,7 @@ import { ICONS } from "../../../../shared/ui/icons";
 import { Button } from "../../../../shared/ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { IRegister } from "../../types/register";
+import { styles } from "./register-form.styles";
 
 
 export function RegisterForm(){
@@ -13,8 +14,8 @@ export function RegisterForm(){
     function onSubmit(data: IRegister) {
         console.log(data)}
         return(
-                <View>
-                    <View>
+                <View style={styles.container}>
+                    <View style={styles.form}>
                         <Controller
                             control={control}
                             name="email"
@@ -96,7 +97,6 @@ export function RegisterForm(){
 					}}
 				/>
 </View>
-                    <View><Button label="Login" onPress={handleSubmit(onSubmit)} /></View>
-                    <View><Button label="Already have an account? Login now"/></View>
+                    <View style={styles.buttonBlock}><Button label="Login" onPress={handleSubmit(onSubmit)} /></View>
                 </View>
 )}

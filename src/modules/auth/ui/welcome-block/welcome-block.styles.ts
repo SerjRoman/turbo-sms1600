@@ -13,6 +13,6 @@ export const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 32,
-		color: COLORS.pinkPrimary,
+		color: COLORS.brownPrimaryLight,
 	},
 });
