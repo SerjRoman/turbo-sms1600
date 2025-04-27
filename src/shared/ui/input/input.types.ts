@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Control, ControllerProps, FieldValues, UseControllerProps } from "react-hook-form";
 import { TextInputProps, TextStyle, ViewStyle } from "react-native";
 
 {/* <Input 
@@ -18,12 +19,14 @@ import { TextInputProps, TextStyle, ViewStyle } from "react-native";
 
 // container
 
-export interface IInputProps extends TextInputProps {
+type BaseProps = TextInputProps & UseControllerProps
+
+export interface IInputProps extends BaseProps {
     iconLeft?: ReactNode,
     iconRight?: ReactNode,
     inputStyles?: TextStyle,
     containerStyles?: ViewStyle
-    errMsg?: string;
-    label?: string
+    label?: string;
+    control: Control<any>
 }
 
