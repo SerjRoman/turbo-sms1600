@@ -13,9 +13,9 @@ export const styles = StyleSheet.create({
 		borderColor: COLORS.black,
 	},
 	input: {
-        flex: 1,
-        height: '100%'
-    },
+		flex: 1,
+		height: "100%",
+	},
 	label: {
 		fontWeight: 500,
 		fontSize: 16,

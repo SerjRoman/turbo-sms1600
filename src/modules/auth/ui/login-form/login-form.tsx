@@ -22,14 +22,12 @@ export function LoginForm() {
 					rules={{
 						required: {
 							value: true,
-							message: "Email is required"
-						}
+							message: "Email is required",
+						},
 					}}
 					control={control}
 					placeholder="SuperCoolEmail@gmail.com"
-					iconLeft={
-						<ICONS.UserIcon width={30} height={30} />
-					}
+					iconLeft={<ICONS.UserIcon width={30} height={30} />}
 					label="Email"
 					autoCorrect={false}
 				/>
@@ -40,8 +38,8 @@ export function LoginForm() {
 					rules={{
 						required: {
 							value: true,
-							message: "Password is required"
-						}
+							message: "Password is required",
+						},
 					}}
 					placeholder="Password"
 					label="Password"
@@ -52,6 +50,5 @@ export function LoginForm() {
 				<Button label="Login" onPress={handleSubmit(onSubmit)} />
 			</View>
 		</View>
-
 	);
 }

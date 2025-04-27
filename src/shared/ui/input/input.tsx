@@ -23,19 +23,30 @@ function Input({
 					<View>
 						{label && <Text style={styles.label}>{label}</Text>}
 						<View style={[styles.inputBox, containerStyles]}>
-							{iconLeft && <View style={{ marginRight: 2 }}>{iconLeft}</View>}
-							<TextInput onChange={field.onChange}
+							{iconLeft && (
+								<View style={{ marginRight: 2 }}>
+									{iconLeft}
+								</View>
+							)}
+							<TextInput
+								onChange={field.onChange}
 								onChangeText={field.onChange}
 								value={field.value}
-								style={[inputStyles, styles.input]} {...props} />
+								style={[inputStyles, styles.input]}
+								{...props}
+							/>
 							{iconRight && (
-								<View style={{ marginLeft: "auto" }}>{iconRight}</View>
+								<View style={{ marginLeft: "auto" }}>
+									{iconRight}
+								</View>
 							)}
 						</View>
 						{fieldState.error && (
 							<View style={styles.errorBox}>
 								<ICONS.ErrorIcon width={16} height={16} />
-								<Text style={styles.errMsg}>{fieldState.error?.message}</Text>
+								<Text style={styles.errMsg}>
+									{fieldState.error?.message}
+								</Text>
 							</View>
 						)}
 					</View>

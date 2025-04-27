@@ -1,1 +1,2 @@
-export {ILogin} from "./login"
+export { ILogin } from "./login";
+export { ISignUp } from "./signup";
