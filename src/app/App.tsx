@@ -14,8 +14,8 @@ export default function App() {
 				<StatusBar style="auto" />
 				<WelcomeBlock />
                 {/* <LoginForm/> */}
-				<RegisterStepOne/>
-				{/* <RegisterStepTwo /> */}
+				{/* <RegisterStepOne/> */}
+				<RegisterStepTwo />
 				<EndBlock/>
 			</SafeAreaView>
 		</Providers>

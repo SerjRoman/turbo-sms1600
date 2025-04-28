@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../../../shared/constants";
 
 export const styles = StyleSheet.create({
 	container: {
@@ -19,13 +20,14 @@ export const styles = StyleSheet.create({
 		gap: 20,
 		padding: 20,
 	},
-    imageForm:{
-        alignItems:"center"
-    },
-    photoText:{
-        fontWeight:500
-    },
+	imageForm: {
+		alignItems: "center",
+	},
+	photoText: {
+		fontWeight: 500,
+	},
 	buttonBlock: {
 		alignSelf: "center",
 	},
+    
 });

@@ -5,7 +5,14 @@ import { Button } from "../../../../shared/ui/button";
 import { ICONS } from "../../../../shared/ui/icons";
 import { IRegisterStepTwo } from "../../types";
 import { styles } from "./register-step-two.styles";
-// import { SetImage } from "../../../../shared/ui/images";
+
+import { TouchableOpacity, Image } from "react-native";
+import { useState } from "react";
+import {
+	launchImageLibraryAsync,
+	requestMediaLibraryPermissionsAsync,
+} from "expo-image-picker";
+import { SetImage } from "../../../../shared/ui/tools";
 
 export function RegisterStepTwo() {
 	const { handleSubmit, control } = useForm<IRegisterStepTwo>({
@@ -64,11 +71,12 @@ export function RegisterStepTwo() {
 						);
 					}}
 				/>
+				<View style={styles.imageForm}>
+					<SetImage />
+					<Text style={styles.photoText}>Upload photo</Text>
+				</View>
 			</View>
-            <View style={styles.imageForm}>
-                {/* <SetImage/> */}
-                <Text style={styles.photoText}>Upload photo</Text>
-            </View>
+
 			<View style={styles.buttonBlock}>
 				<Button label="Register" onPress={handleSubmit(onSubmit)} />
 			</View>
