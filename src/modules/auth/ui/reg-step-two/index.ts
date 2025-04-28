@@ -1,0 +1,1 @@
+export { UserInfo } from "./reg-step-two"

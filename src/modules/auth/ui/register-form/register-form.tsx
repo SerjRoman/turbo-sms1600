@@ -5,6 +5,7 @@ import { Button } from "../../../../shared/ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { IRegister } from "../../types/register";
 import { styles } from "./register-form.styles";
+import { Link, Redirect, router } from "expo-router";
 
 
 export function RegisterForm(){
@@ -12,7 +13,8 @@ export function RegisterForm(){
             defaultValues: { email: "",username:"", password: "",retype:""  }
         });
     function onSubmit(data: IRegister) {
-        console.log(data)}
+        console.log(data)
+		router.replace('/register-step-two')}
         return(
                 <View style={styles.container}>
                     <View style={styles.form}>
@@ -97,6 +99,6 @@ export function RegisterForm(){
 					}}
 				/>
 </View>
-                    <View style={styles.buttonBlock}><Button label="Login" onPress={handleSubmit(onSubmit)} /></View>
+                    <View style={styles.buttonBlock}><Button label="Continue" onPress={handleSubmit(onSubmit) } /></View>
                 </View>
 )}
