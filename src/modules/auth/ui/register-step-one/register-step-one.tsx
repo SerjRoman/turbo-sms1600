@@ -5,8 +5,10 @@ import { Button } from "../../../../shared/ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { IRegister } from "../../types";
 import { styles } from "./register-step-one.styles";
+import { useRouter } from "expo-router";
 
 export function RegisterStepOne() {
+    const router = useRouter()
 	const { handleSubmit, control } = useForm<IRegister>({
 		defaultValues: {
 			email: "",
@@ -16,7 +18,7 @@ export function RegisterStepOne() {
 		},
 	});
 	function onSubmit(data: IRegister) {
-        
+        router.navigate("/second-register")
 		console.log(data);
 	}
 
