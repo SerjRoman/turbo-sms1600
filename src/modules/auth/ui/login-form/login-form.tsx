@@ -1,10 +1,11 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { Input } from "../../../../shared/ui/input";
 import { ICONS } from "../../../../shared/ui/icons";
 import { Button } from "../../../../shared/ui/button";
 import { useForm } from "react-hook-form";
 import { ILogin } from "../../types";
 import { styles } from "./login-form.styles";
+import { Link } from "expo-router";
 
 export function LoginForm() {
 	// задаем стандартное значение так как по умолчанию стоят undefinedы а нам нужны пустые строки для корректной работы onChange и onChangeText
@@ -49,6 +50,7 @@ export function LoginForm() {
 			<View style={styles.buttonBlock}>
 				<Button label="Login" onPress={handleSubmit(onSubmit)} />
 			</View>
+			<Text>Don’t have an account? <Link href={'/register'}>Register now</Link></Text>
 		</View>
 	);
 }
