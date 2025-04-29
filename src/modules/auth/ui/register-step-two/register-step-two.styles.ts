@@ -29,5 +29,22 @@ export const styles = StyleSheet.create({
 	buttonBlock: {
 		alignSelf: "center",
 	},
-    
+	icon: {
+		position: "absolute",
+		width: 35,
+		height: 35,
+	},
+	image: {
+		borderRadius: 25,
+		width: 75,
+		height: 75
+	},
+	button: {
+		borderRadius: 25,
+		backgroundColor: COLORS.pinkPrimary, 
+		width: 75,
+		height: 75,
+		alignItems: "center",
+		justifyContent: "center",
+	},
 });

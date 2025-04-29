@@ -1,10 +1,10 @@
 import { Link } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { RegisterStepOne } from "../../modules/auth/ui/register-step-one";
-import { COLORS } from "../../shared/constants";
 import { Text, View } from "react-native";
-import { WelcomeBlock } from "../../modules/auth/ui";
+import { RegisterStepOne, WelcomeBlock } from "../../../modules/auth/ui";
+import { COLORS } from "../../../shared/constants";
+
 
 export default function Register() {
 	return (

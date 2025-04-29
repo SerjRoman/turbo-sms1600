@@ -9,4 +9,5 @@ export interface IRegister {
 export interface IRegisterStepTwo{
     name: string;
     surname: string;
+    avatar: string
 }

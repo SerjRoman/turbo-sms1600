@@ -8,7 +8,8 @@ import { styles } from "./register-step-one.styles";
 import { useRouter } from "expo-router";
 
 export function RegisterStepOne() {
-    const router = useRouter()
+    // useRouter - возвращает объект Router, который дает возможность направлять(навигация) пользователя по экранам 
+	const router = useRouter();
 	const { handleSubmit, control } = useForm<IRegister>({
 		defaultValues: {
 			email: "",
@@ -18,7 +19,10 @@ export function RegisterStepOne() {
 		},
 	});
 	function onSubmit(data: IRegister) {
-        router.navigate("/second-register")
+        const {confirmPassword, ...otherData} = data
+        // Если хотим передать параметры при навигации на след экран
+        // Тогда передаем объект с обязательным свойством pathname(ссылка) и свойством params: объект ваших параметров
+		router.navigate({pathname: "/register/step-two", params: otherData});
 		console.log(data);
 	}
 
@@ -28,11 +32,11 @@ export function RegisterStepOne() {
 				<Controller
 					control={control}
 					name="email"
-                    rules={{
+					rules={{
 						required: {
 							value: true,
-							message: "Email is required"
-						}
+							message: "Email is required",
+						},
 					}}
 					render={({ field, fieldState }) => {
 						return (
@@ -46,7 +50,7 @@ export function RegisterStepOne() {
 								value={field.value}
 								label="Email"
 								autoCorrect={false}
-                                errMsg={fieldState.error?.message}
+								errMsg={fieldState.error?.message}
 							/>
 						);
 					}}
@@ -54,11 +58,11 @@ export function RegisterStepOne() {
 				<Controller
 					control={control}
 					name="username"
-                    rules={{
+					rules={{
 						required: {
 							value: true,
-							message: "Username is required"
-						}
+							message: "Username is required",
+						},
 					}}
 					render={({ field, fieldState }) => {
 						return (
@@ -72,18 +76,18 @@ export function RegisterStepOne() {
 								value={field.value}
 								label="Username"
 								autoCorrect={false}
-                                errMsg={fieldState.error?.message}
+								errMsg={fieldState.error?.message}
 							/>
 						);
 					}}
 				/>
 				<Controller
 					control={control}
-                    rules={{
+					rules={{
 						required: {
 							value: true,
-							message: "Password is required"
-						}
+							message: "Password is required",
+						},
 					}}
 					name="password"
 					render={({ field, fieldState }) => {
@@ -102,11 +106,11 @@ export function RegisterStepOne() {
 				/>
 				<Controller
 					control={control}
-                    rules={{
+					rules={{
 						required: {
 							value: true,
-							message: "Password is required"
-						}
+							message: "Password is required",
+						},
 					}}
 					name="confirmPassword"
 					render={({ field, fieldState }) => {
@@ -124,9 +128,7 @@ export function RegisterStepOne() {
 					}}
 				/>
 			</View>
-			<View
-				style={styles.buttonBlock}
-			>
+			<View style={styles.buttonBlock}>
 				<Button label="Next" onPress={handleSubmit(onSubmit)} />
 			</View>
 		</View>

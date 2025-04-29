@@ -1,27 +1,29 @@
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "../../../../shared/ui/input";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { Button } from "../../../../shared/ui/button";
 import { ICONS } from "../../../../shared/ui/icons";
 import { IRegisterStepTwo } from "../../types";
 import { styles } from "./register-step-two.styles";
-
-import { TouchableOpacity, Image } from "react-native";
-import { useState } from "react";
-import {
-	launchImageLibraryAsync,
-	requestMediaLibraryPermissionsAsync,
-} from "expo-image-picker";
-import { SetImage } from "../../../../shared/ui/tools";
+import { useLocalSearchParams } from "expo-router";
+import { IMAGES } from "../../../../shared/ui/images";
+import { pickImage } from "../../../../shared/tools";
 
 export function RegisterStepTwo() {
-	const { handleSubmit, control } = useForm<IRegisterStepTwo>({
+	const params = useLocalSearchParams<{
+		username: string;
+		password: string;
+		email: string;
+	}>();
+	const { handleSubmit, control, setValue } = useForm<IRegisterStepTwo>({
 		defaultValues: {
 			name: "",
 			surname: "",
+			avatar: "",
 		},
 	});
 	function onSubmit(data: IRegisterStepTwo) {
+		console.log(params);
 		console.log(data);
 	}
 
@@ -72,7 +74,35 @@ export function RegisterStepTwo() {
 					}}
 				/>
 				<View style={styles.imageForm}>
-					<SetImage />
+					<Controller
+						control={control}
+						name="avatar"
+						render={({ field, fieldState }) => {
+							return (
+								<TouchableOpacity
+									onPress={async () => {
+										const images = await pickImage({
+											mediaTypes: "images",
+											allowsEditing: false,
+											allowsMultipleSelection: true,
+											selectionLimit: 1,
+											base64: true,
+										});
+										if (!images) return;
+										if (!images[0].base64) return;
+										// Boolean(undefined, null ) -> false: not false -> true
+										setValue("avatar", images[0].base64);
+									}}
+									style={styles.button}
+								>
+									{/* проверка через field */}
+									<IMAGES.LogoImage style={styles.image} />
+									<ICONS.SearchIcon style={styles.icon} />
+								</TouchableOpacity>
+							);
+						}}
+					/>
+
 					<Text style={styles.photoText}>Upload photo</Text>
 				</View>
 			</View>
