@@ -22,6 +22,7 @@ export const ICONS = {
 	BackIcon,
 	ChatsIcon,
 	EyeIcon,
+    EyeSlashIcon,
 	KeyIcon,
 	PlusIcon,
 	SearchIcon,

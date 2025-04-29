@@ -1,0 +1,1 @@
+export { SetImage } from "./pick-image";
