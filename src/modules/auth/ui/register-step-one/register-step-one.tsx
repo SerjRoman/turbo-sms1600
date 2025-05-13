@@ -3,14 +3,14 @@ import { Input } from "../../../../shared/ui/input";
 import { ICONS } from "../../../../shared/ui/icons";
 import { Button } from "../../../../shared/ui/button";
 import { useForm, Controller } from "react-hook-form";
-import { IRegister } from "../../types";
+import { IRegisterStepOne } from "../../types";
 import { styles } from "./register-step-one.styles";
 import { useRouter } from "expo-router";
 
 export function RegisterStepOne() {
     // useRouter - возвращает объект Router, который дает возможность направлять(навигация) пользователя по экранам 
 	const router = useRouter();
-	const { handleSubmit, control } = useForm<IRegister>({
+	const { handleSubmit, control } = useForm<IRegisterStepOne>({
 		defaultValues: {
 			email: "",
 			username: "",
@@ -18,7 +18,7 @@ export function RegisterStepOne() {
 			confirmPassword: "",
 		},
 	});
-	function onSubmit(data: IRegister) {
+	function onSubmit(data: IRegisterStepOne) {
         const {confirmPassword, ...otherData} = data
         // Если хотим передать параметры при навигации на след экран
         // Тогда передаем объект с обязательным свойством pathname(ссылка) и свойством params: объект ваших параметров

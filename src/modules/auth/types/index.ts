@@ -1,2 +1,3 @@
 export { ILogin } from "./login";
-export { IRegister, IRegisterStepTwo } from "./register";
+export { IRegisterStepOne, IRegisterStepTwo, Register } from "./register";
+export { IUser } from "./user";
