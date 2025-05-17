@@ -8,6 +8,7 @@ import { styles } from "./register-step-two.styles";
 import { useLocalSearchParams } from "expo-router";
 import { IMAGES } from "../../../../shared/ui/images";
 import { pickImage } from "../../../../shared/tools";
+import { useState } from "react";
 
 export function RegisterStepTwo() {
 	const params = useLocalSearchParams<{
@@ -26,6 +27,9 @@ export function RegisterStepTwo() {
 		console.log(params);
 		console.log(data);
 	}
+
+    // const [image, setImage] = useState()
+    // const 
 
 	return (
 		<View style={styles.container}>
@@ -92,12 +96,13 @@ export function RegisterStepTwo() {
 										if (!images[0].base64) return;
 										// Boolean(undefined, null ) -> false: not false -> true
 										setValue("avatar", images[0].base64);
+                                        // field.onChange()
 									}}
 									style={styles.button}
 								>
-									{/* проверка через field */}
 									<IMAGES.LogoImage style={styles.image} />
 									<ICONS.SearchIcon style={styles.icon} />
+                                    {/* проверка через field */ }
 								</TouchableOpacity>
 							);
 						}}

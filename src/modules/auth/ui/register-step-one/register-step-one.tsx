@@ -111,6 +111,7 @@ export function RegisterStepOne() {
 							value: true,
 							message: "Password is required",
 						},
+                        
 					}}
 					name="confirmPassword"
 					render={({ field, fieldState }) => {
