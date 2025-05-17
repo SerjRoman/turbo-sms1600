@@ -5,13 +5,15 @@ import { Button } from "../../../../shared/ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { ILogin } from "../../types";
 import { styles } from "./login-form.styles";
+import { useAuth } from "../../hooks/useAuth";
 
 export function LoginForm() {
 	// задаем стандартное значение так как по умолчанию стоят undefinedы а нам нужны пустые строки для корректной работы onChange и onChangeText
 	const { handleSubmit, control } = useForm<ILogin>({
 		defaultValues: { email: "", password: "" },
 	});
-	function onSubmit(data: ILogin) {
+	async function onSubmit(data: ILogin) {
+        await useAuth().login(data)
 		console.log(data);
 	}
 	return (

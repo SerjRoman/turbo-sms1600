@@ -11,4 +11,8 @@ export interface IRegisterStepTwo {
 	avatar: string;
 }
 
-export type Register = IRegisterStepOne & IRegisterStepTwo
+export interface Register extends IRegisterStepTwo {
+	email: string;
+	username: string;
+	password: string;
+}

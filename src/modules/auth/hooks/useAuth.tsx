@@ -11,12 +11,23 @@ export function useAuth() {
 			endpoint: "/users/me/",
 			token: token,
 		});
+        // наче можна було б юзнути switch case, але я нічо з ним не придумала
+        // винести теж можна було б, але хз чо не зробила
 		if (result.status === "failure") {
-            // if (result.code === 404) {
-                
-            // }
-            return
-        };
+			if (result.code === 404) {
+				throw new Error(result.message);
+			} else if (result.code === 409) {
+                throw new Error(result.message);
+			} else if (result.code === 401) {
+                throw new Error(result.message);
+			} else if (result.code === 422) {
+                throw new Error(result.message);
+			} else if (result.code === 500) {
+                throw new Error(result.message);
+			}
+			return
+		}
+        
 		setUser(result.data);
 	}
 
@@ -25,7 +36,20 @@ export function useAuth() {
 			endpoint: "/users/login/",
 			body: credentials,
 		});
-		if (result.status === "failure") return;
+		if (result.status === "failure") {
+			if (result.code === 404) {
+				throw new Error(result.message);
+			} else if (result.code === 409) {
+                throw new Error(result.message);
+			} else if (result.code === 401) {
+                throw new Error(result.message);
+			} else if (result.code === 422) {
+                throw new Error(result.message);
+			} else if (result.code === 500) {
+                throw new Error(result.message);
+			}
+			return
+		}
 		setToken(result.data);
 	}
 
@@ -34,7 +58,20 @@ export function useAuth() {
 			endpoint: "/users/register/",
 			body: credentials,
 		});
-		if (result.status === "failure") return;
+		if (result.status === "failure") {
+			if (result.code === 404) {
+				throw new Error(result.message);
+			} else if (result.code === 409) {
+                throw new Error(result.message);
+			} else if (result.code === 401) {
+                throw new Error(result.message);
+			} else if (result.code === 422) {
+                throw new Error(result.message);
+			} else if (result.code === 500) {
+                throw new Error(result.message);
+			}
+			return
+		}
 		setToken(result.data);
 	}
 
@@ -47,11 +84,10 @@ export function useAuth() {
 
 // KeyboardAwareScrollView
 // app.json -> ("android": "softwareKeyboardLayoutMode": "pan")
-// localhost -> 
+// localhost ->
 // 192.168
 // 192
 
-
-// для реализации модалки - 
+// для реализации модалки -
 // вариант 1 - react-native-modal - модалка на экране
 //  вариант 2 - через создание нового экрана(в _layout указать screenOptions presentation)

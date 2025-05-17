@@ -9,6 +9,7 @@ import { useLocalSearchParams } from "expo-router";
 import { IMAGES } from "../../../../shared/ui/images";
 import { pickImage } from "../../../../shared/tools";
 import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 export function RegisterStepTwo() {
 	const params = useLocalSearchParams<{
@@ -23,7 +24,8 @@ export function RegisterStepTwo() {
 			avatar: "",
 		},
 	});
-	function onSubmit(data: IRegisterStepTwo) {
+	async function onSubmit(data: IRegisterStepTwo) {
+        await useAuth().register({...params, ...data})
 		console.log(params);
 		console.log(data);
 	}
