@@ -1,57 +1,91 @@
 import { ApiClient } from "../../../shared/api";
 import { useUserContext } from "../context/user";
 import { ILogin, Register, IUser } from "../types";
+import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function useAuth() {
 	const { token, setUser, setToken } = useUserContext();
+	const [error, setError] = useState<string | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	async function getUser() {
 		if (!token) return;
+		setIsLoading(true);
 		const result = await ApiClient.Get<IUser>({
 			endpoint: "/users/me/",
 			token: token,
 		});
+		setIsLoading(false);
 		if (result.status === "failure") {
-            // if (result.code === 404) {
-                
-            // }
-            return
-        };
+			switch (result.code) {
+				case 401:
+					setError("You're not authenticated");
+					break;
+				case 404:
+					setError("User not found");
+					break;
+				default:
+					setError("Network error");
+			}
+			return;
+		}
 		setUser(result.data);
 	}
 
 	async function login(credentials: ILogin) {
+		setIsLoading(true);
 		const result = await ApiClient.Post<string>({
 			endpoint: "/users/login/",
 			body: credentials,
 		});
-		if (result.status === "failure") return;
+		setIsLoading(false);
+		if (result.status === "failure") {
+			switch (result.code) {
+				case 404:
+					setError("User not found");
+					break;
+				case 422:
+					setError("Invalid data");
+					break;
+				default:
+					setError("Network error");
+			}
+			return;
+		}
 		setToken(result.data);
+		await AsyncStorage.setItem("token", String(token))
 	}
 
 	async function register(credentials: Register) {
+		setIsLoading(true);
 		const result = await ApiClient.Post<string>({
 			endpoint: "/users/register/",
 			body: credentials,
 		});
-		if (result.status === "failure") return;
+		setIsLoading(false);
+		if (result.status === "failure") {
+			switch (result.code) {
+				case 409:
+					setError("User already exists");
+					break;
+				case 422:
+					setError("Invalid data");
+					break;
+				default:
+					setError("Network error");
+			}
+			return;
+		}
 		setToken(result.data);
+		await AsyncStorage.setItem("token", String(token))
 	}
 
 	return {
 		getUser,
 		login,
 		register,
+		error,
+		isLoading,
 	};
 }
-
-// KeyboardAwareScrollView
-// app.json -> ("android": "softwareKeyboardLayoutMode": "pan")
-// localhost -> 
-// 192.168
-// 192
-
-
-// для реализации модалки - 
-// вариант 1 - react-native-modal - модалка на экране
-//  вариант 2 - через создание нового экрана(в _layout указать screenOptions presentation)
