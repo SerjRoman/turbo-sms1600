@@ -1,93 +1,91 @@
 import { ApiClient } from "../../../shared/api";
 import { useUserContext } from "../context/user";
 import { ILogin, Register, IUser } from "../types";
+import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function useAuth() {
 	const { token, setUser, setToken } = useUserContext();
+	const [error, setError] = useState<string | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	async function getUser() {
 		if (!token) return;
+		setIsLoading(true);
 		const result = await ApiClient.Get<IUser>({
 			endpoint: "/users/me/",
 			token: token,
 		});
-        // наче можна було б юзнути switch case, але я нічо з ним не придумала
-        // винести теж можна було б, але хз чо не зробила
+		setIsLoading(false);
 		if (result.status === "failure") {
-			if (result.code === 404) {
-				throw new Error(result.message);
-			} else if (result.code === 409) {
-                throw new Error(result.message);
-			} else if (result.code === 401) {
-                throw new Error(result.message);
-			} else if (result.code === 422) {
-                throw new Error(result.message);
-			} else if (result.code === 500) {
-                throw new Error(result.message);
+			switch (result.code) {
+				case 401:
+					setError("You're not authenticated");
+					break;
+				case 404:
+					setError("User not found");
+					break;
+				default:
+					setError("Network error");
 			}
-			return
+			return;
 		}
-        
 		setUser(result.data);
 	}
 
 	async function login(credentials: ILogin) {
+		setIsLoading(true);
 		const result = await ApiClient.Post<string>({
 			endpoint: "/users/login/",
 			body: credentials,
 		});
+		setIsLoading(false);
 		if (result.status === "failure") {
-			if (result.code === 404) {
-				throw new Error(result.message);
-			} else if (result.code === 409) {
-                throw new Error(result.message);
-			} else if (result.code === 401) {
-                throw new Error(result.message);
-			} else if (result.code === 422) {
-                throw new Error(result.message);
-			} else if (result.code === 500) {
-                throw new Error(result.message);
+			switch (result.code) {
+				case 404:
+					setError("User not found");
+					break;
+				case 422:
+					setError("Invalid data");
+					break;
+				default:
+					setError("Network error");
 			}
-			return
+			return;
 		}
 		setToken(result.data);
+		await AsyncStorage.setItem("token", String(token))
 	}
 
 	async function register(credentials: Register) {
+		setIsLoading(true);
 		const result = await ApiClient.Post<string>({
 			endpoint: "/users/register/",
 			body: credentials,
 		});
+		setIsLoading(false);
 		if (result.status === "failure") {
-			if (result.code === 404) {
-				throw new Error(result.message);
-			} else if (result.code === 409) {
-                throw new Error(result.message);
-			} else if (result.code === 401) {
-                throw new Error(result.message);
-			} else if (result.code === 422) {
-                throw new Error(result.message);
-			} else if (result.code === 500) {
-                throw new Error(result.message);
+			switch (result.code) {
+				case 409:
+					setError("User already exists");
+					break;
+				case 422:
+					setError("Invalid data");
+					break;
+				default:
+					setError("Network error");
 			}
-			return
+			return;
 		}
 		setToken(result.data);
+		await AsyncStorage.setItem("token", String(token))
 	}
 
 	return {
 		getUser,
 		login,
 		register,
+		error,
+		isLoading,
 	};
 }
-
-// KeyboardAwareScrollView
-// app.json -> ("android": "softwareKeyboardLayoutMode": "pan")
-// localhost ->
-// 192.168
-// 192
-
-// для реализации модалки -
-// вариант 1 - react-native-modal - модалка на экране
-//  вариант 2 - через создание нового экрана(в _layout указать screenOptions presentation)

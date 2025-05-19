@@ -16,6 +16,7 @@ export async function Get<T>(options: IGetRequest): Promise<Result<T>> {
 	try {
 		const response = await fetch(`${API_URL}${endpoint}`, {
 			headers: requestHeaders,
+            
 		});
 		const result = await response.json();
 		const resultWithCode: Result<T> = {

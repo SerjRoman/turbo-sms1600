@@ -9,6 +9,8 @@ import { ChatsIcon } from "./chats-icon";
 import { ContactsIcon } from "./contacts-icon";
 import { EyeSlashIcon } from "./eye-slash-icon";
 import { EmailIcon } from "./email-icon";
+import { SettingsIcon } from "./settings-icon";
+import { ProfileIcon } from "./profile";
 /*
 1. копіюємо свгшки із фігми
 2. вставляємо те що скопіювали у прекрасний сайт https://transform.tools/svg-to-react-native
@@ -30,4 +32,6 @@ export const ICONS = {
 	ErrorIcon,
 	ContactsIcon,
 	EmailIcon,
+	SettingsIcon,
+	ProfileIcon,
 };

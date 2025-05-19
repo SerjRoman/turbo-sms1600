@@ -1,44 +1,58 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { Result } from "../../../shared/types/api";
 import { IUser } from "../types";
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "../hooks/useAuth";
 
-
-interface IUserContext{
-    user: IUser | null
-    token: string | null
-    isAuthenticated: () => boolean
-    setUser: (value: IUser) => void
-    setToken: (value: string) => void
+interface IUserContext {
+	user: IUser | null;
+	token: string | null;
+	isAuthenticated: () => boolean;
+	setUser: (value: IUser) => void;
+	setToken: (value: string) => void;
 }
 
-const UserContext = createContext<IUserContext | null>(null)
+const UserContext = createContext<IUserContext | null>(null);
 
-export function useUserContext(){
-    const context = useContext(UserContext)
-    if (!context) {
-        throw Error("Context is null")
-    }
-    return context
+export function useUserContext() {
+	const context = useContext(UserContext);
+	if (!context) {
+		throw Error("Context is null");
+	}
+	return context;
 }
 
+export function UserContextProvider({ children }: { children: ReactNode }) {
+	const [user, setUser] = useState<IUser | null>(null);
+	const [token, setToken] = useState<string | null>(null);
+	const { getUser } = useAuth();
+	useEffect(() => {
+		const fetchUser = async () => {
+			const token = await AsyncStorage.getItem("token");
+			if (token) {
+				setToken(token);
+				await getUser();
+			}
+		};
+		fetchUser();
+	});
 
-export function UserContextProvider({children}: {children: ReactNode}){
-    const [user, setUser] = useState<IUser | null>(null)
-    const [token, setToken] = useState<string | null>(null)
+	function isAuthenticated() {
+		return !!user;
+	}
 
-    function isAuthenticated(){
-        return !!user
-    }
-
-    return (
-        <UserContext value={{
-            user: user,
-            token: token,
-            isAuthenticated: isAuthenticated,
-            setUser: setUser,
-            setToken: setToken
-        }}>
-            {children}
-        </UserContext>
-    )
+	return (
+		<UserContext
+			value={{
+				user: user,
+				token: token,
+				isAuthenticated: isAuthenticated,
+				setUser: setUser,
+				setToken: setToken,
+			}}
+		>
+			{children}
+		</UserContext>
+	);
 }
