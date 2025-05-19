@@ -2,11 +2,13 @@ import { Tabs } from "expo-router";
 import { ICONS } from "../../shared/ui/icons";
 import { Header } from "../../shared/ui/header/header";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { COLORS } from "../../shared/constants";
 
 export default function TabsLayout() {
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
-			<Tabs initialRouteName="chats">
+        // он не хочет, хз почему
+		<SafeAreaView style={{ flex: 1, backgroundColor:COLORS.bisqueSecondary }}>
+			<Tabs initialRouteName="chats" >
 				<Tabs.Screen
 					name={"chats"}
 					options={{
@@ -28,6 +30,9 @@ export default function TabsLayout() {
 							);
 						},
 						tabBarLabel: "Contacts",
+                        header: () => {
+							return <Header title="Contacts" />;
+						},
 					}}
 				/>
 				<Tabs.Screen
@@ -37,6 +42,9 @@ export default function TabsLayout() {
 							return <ICONS.ProfileIcon width={20} height={20} />;
 						},
 						tabBarLabel: "Profile",
+                        header: () => {
+							return <Header title="Profile" />;
+						},
 					}}
 				/>
 				<Tabs.Screen
@@ -48,6 +56,9 @@ export default function TabsLayout() {
 							);
 						},
 						tabBarLabel: "Settings",
+                        header: () => {
+							return <Header title="Settings" />;
+						},
 					}}
 				/>
 			</Tabs>
