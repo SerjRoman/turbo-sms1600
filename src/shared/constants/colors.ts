@@ -5,6 +5,6 @@ export const COLORS = {
     pinkPrimary: '#733349',
     error: '#FF0000',
     white: '#FFFFFF',
-    black: '#000000'
+    black: '#000000',
 
 }

@@ -3,7 +3,7 @@ import { COLORS } from "../../constants";
 
 export const styles = StyleSheet.create({
 	inputBox: {
-		height: 60,
+		height:"auto",
 		flexDirection: "row",
 		alignItems: "center",
 		paddingHorizontal: 10,
@@ -12,6 +12,18 @@ export const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: COLORS.black,
 	},
+
+    searchInputBox: {
+        height:"auto",
+		flexDirection: "row",
+		alignItems: "center",
+		paddingHorizontal: 10,
+		borderRadius: 16,
+		backgroundColor: COLORS.grey,
+		borderWidth: 1,
+		borderColor: COLORS.black,
+    },
+
 	input: {
         flex: 1,
         height: '100%'

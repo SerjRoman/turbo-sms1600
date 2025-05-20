@@ -75,4 +75,35 @@ function Password(props: Omit<IInputProps, "iconLeft" | "iconRight">) {
 
 Input.Password = Password;
 
+function Search({
+	label,
+	errMsg,
+	iconLeft,
+	iconRight,
+	inputStyles,
+	containerStyles,
+	...props
+}: IInputProps) {
+	return (
+		<View>
+			{label && <Text style={styles.label}>{label}</Text>}
+			<View style={[styles.searchInputBox, containerStyles]}>
+				{iconLeft && <View style={{ marginRight: 2 }}>{iconLeft}</View>}
+				<TextInput style={[inputStyles, styles.input]} {...props} />
+				{iconRight && (
+					<View style={{ marginLeft: "auto" }}>{iconRight}</View>
+				)}
+			</View>
+			{errMsg && (
+				<View style={styles.errorBox}>
+					<ICONS.ErrorIcon width={16} height={16} />
+					<Text style={styles.errMsg}>{errMsg}</Text>
+				</View>
+			)}
+		</View>
+	);
+}
+
+Input.Search = Search;
+
 export { Input };
