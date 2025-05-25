@@ -35,3 +35,5 @@ export const ICONS = {
 	SettingsIcon,
 	ProfileIcon,
 };
+
+export { SearchIcon };
