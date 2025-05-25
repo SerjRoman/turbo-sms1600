@@ -6,9 +6,8 @@ import { COLORS } from "../shared/constants";
 //Stack - последовательность экранов и при помощи него мы можем указывать какие есть экраны и взаимодействие с ними(из expo-router)
 export default function RootLayout() {
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
+		// <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.bisquePrimary}} >
 			<Providers>
-                <StatusBar backgroundColor={COLORS.bisquePrimary}/>
 				<Stack screenOptions={{ headerShown: false }}>
 					{/* Stack.Screen - компонент который позволяет указать/обозначить какой то экран и настройки к нему */}
 					{/* name - имя нашего маршрута */}
@@ -20,6 +19,6 @@ export default function RootLayout() {
 					></Stack.Screen>
 				</Stack>
 			</Providers>
-		</SafeAreaView>
+		// </SafeAreaView>
 	);
 }

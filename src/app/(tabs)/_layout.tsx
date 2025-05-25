@@ -6,14 +6,32 @@ import { COLORS } from "../../shared/constants";
 import { View, Text } from "react-native";
 import { Input } from "../../shared/ui/input";
 import { IMAGES } from "../../shared/ui/images";
+import { HeaderSettings } from "../../modules/auth/ui/settings/ui";
+import { HeaderProfile } from "../../modules/auth/ui/profile/ui";
+import { HeaderContacts } from "../../modules/auth/ui/contacts/ui";
+import { HeaderChats } from "../../modules/auth/ui/chats/ui";
 
 export default function TabsLayout() {
 	return (
 		// он не хочет, хз почему
 		<SafeAreaView
-			style={{ flex: 1, backgroundColor: COLORS.bisqueSecondary }}
+			style={{ flex: 1, backgroundColor: COLORS.bisquePrimary }}
+			edges={["top"]}
 		>
-			<Tabs initialRouteName="chats">
+			<Tabs
+				initialRouteName="chats"
+				screenOptions={{
+					tabBarStyle: {
+						backgroundColor: COLORS.bisqueSecondary,
+					},
+					tabBarLabelStyle: {
+						fontSize: 12,
+					},
+
+					tabBarActiveTintColor: COLORS.grey,
+					tabBarInactiveTintColor: COLORS.black,
+				}}
+			>
 				<Tabs.Screen
 					name={"chats"}
 					options={{
@@ -21,55 +39,7 @@ export default function TabsLayout() {
 							return <ICONS.ChatsIcon width={20} height={20} />;
 						},
 						tabBarLabel: "Chats",
-						header: () => {
-							return (
-								<Header
-									title="Chats"
-									headerLeft={
-										<View>
-											<IMAGES.LogoImage
-												style={{
-													width: 40,
-													height: 40,
-												}}
-											/>
-										</View>
-									}
-									headerRight={
-										<View>
-											<ICONS.PlusIcon
-												width={40}
-												height={40}
-											/>
-										</View>
-									}
-									headerBottom={
-										<View
-											style={{
-												height: 32,
-												borderRadius: 16,
-											}}
-										>
-											<Input.Search
-												style={{
-													height: 31,
-													width: 392,
-													paddingVertical: 1,
-													paddingHorizontal: 7,
-												}}
-												placeholder="Search"
-												iconLeft={
-													<ICONS.SearchIcon
-														width={24}
-														height={24}
-													/>
-												}
-											/>
-										</View>
-									}
-								/>
-							);
-						},
+						header: () => <HeaderChats />,
 					}}
 				/>
 				<Tabs.Screen
@@ -81,55 +51,7 @@ export default function TabsLayout() {
 							);
 						},
 						tabBarLabel: "Contacts",
-						header: () => {
-							return (
-								<Header
-									title="Contacts"
-									headerLeft={
-										<View>
-											<IMAGES.LogoImage
-												style={{
-													width: 40,
-													height: 40,
-												}}
-											/>
-										</View>
-									}
-									headerRight={
-										<View>
-											<ICONS.PlusIcon
-												width={40}
-												height={40}
-											/>
-										</View>
-									}
-									headerBottom={
-										<View
-											style={{
-												height: 32,
-												borderRadius: 16,
-											}}
-										>
-											<Input.Search
-												style={{
-													height: 31,
-													width: 392,
-													paddingVertical: 1,
-													paddingHorizontal: 7,
-												}}
-												placeholder="Search"
-												iconLeft={
-													<ICONS.SearchIcon
-														width={24}
-														height={24}
-													/>
-												}
-											/>
-										</View>
-									}
-								/>
-							);
-						},
+						header: () => <HeaderContacts />,
 					}}
 				/>
 				<Tabs.Screen
@@ -139,23 +61,7 @@ export default function TabsLayout() {
 							return <ICONS.ProfileIcon width={20} height={20} />;
 						},
 						tabBarLabel: "Profile",
-						header: () => {
-							return (
-								<Header
-									title="Profile"
-									headerLeft={
-										<View>
-											<IMAGES.LogoImage
-												style={{
-													width: 40,
-													height: 40,
-												}}
-											/>
-										</View>
-									}
-								/>
-							);
-						},
+						header: () => <HeaderProfile />,
 					}}
 				/>
 				<Tabs.Screen
@@ -167,9 +73,7 @@ export default function TabsLayout() {
 							);
 						},
 						tabBarLabel: "Settings",
-						header: () => {
-							return <Header title="Settings" />;
-						},
+						header: () => <HeaderSettings />,
 					}}
 				/>
 			</Tabs>
