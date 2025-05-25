@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { StepTwo } from "../../modules/contacts/ui/create-contact/step-two";
+import { StepTwo } from "../../modules/contacts/ui";
 
 export default function CreateContactStepTwo(){
     return (

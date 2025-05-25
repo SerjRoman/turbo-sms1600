@@ -23,7 +23,7 @@ export function HeaderContacts() {
 			headerRight={
 				<TouchableOpacity
 					onPress={() => {
-						router.push("/modals/create-contact-step-one");
+						router.push("/modals/create-contact-step-two");
 					}}
 				>
 					<ICONS.PlusIcon width={40} height={40} />

@@ -7,7 +7,7 @@ import { IContact, IUser } from "../../../../../modules/auth/types/index"
 import { Button } from "../../../../../shared/ui/button/button"
 import { useState } from "react"
 
-export function StepTwocts(){
+export function StepTwo(){
     const {control} = useForm<IContact>()
     const [isLoading, setIsLoading] = useState(false);
     // useLocalSearchParams
