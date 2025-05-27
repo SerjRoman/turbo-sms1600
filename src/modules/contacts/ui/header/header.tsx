@@ -1,10 +1,12 @@
-import { View } from "react-native";
-import { Header } from "../../../../../../shared/ui/header";
-import { IMAGES } from "../../../../../../shared/ui/images";
-import { ICONS } from "../../../../../../shared/ui/icons";
-import { Input } from "../../../../../../shared/ui/input";
+import { TouchableOpacity, View } from "react-native";
+import { Header } from "../../../../shared/ui/header";
+import { IMAGES } from "../../../../shared/ui/images";
+import { ICONS } from "../../../../shared/ui/icons";
+import { Input } from "../../../../shared/ui/input";
+import { useRouter } from "expo-router";
 
 export function HeaderContacts() {
+	const router = useRouter();
 	return (
 		<Header
 			title="Contacts"
@@ -19,9 +21,13 @@ export function HeaderContacts() {
 				</View>
 			}
 			headerRight={
-				<View>
+				<TouchableOpacity
+					onPress={() => {
+						router.push("/modals/create-contact-step-two");
+					}}
+				>
 					<ICONS.PlusIcon width={40} height={40} />
-				</View>
+				</TouchableOpacity>
 			}
 			headerBottom={
 				<View
@@ -45,3 +51,6 @@ export function HeaderContacts() {
 		/>
 	);
 }
+
+// 🍓
+// ^kryto

@@ -1,8 +1,9 @@
 import { View } from "react-native";
-import { Header } from "../../../../../../shared/ui/header";
-import { IMAGES } from "../../../../../../shared/ui/images";
-import { ICONS } from "../../../../../../shared/ui/icons";
-import { Input } from "../../../../../../shared/ui/input";
+import { Header } from "../../../../shared/ui/header";
+import { IMAGES } from "../../../../shared/ui/images";
+import { ICONS } from "../../../../shared/ui/icons";
+import { Input } from "../../../../shared/ui/input";
+
 
 export function HeaderChats() {
 	return (

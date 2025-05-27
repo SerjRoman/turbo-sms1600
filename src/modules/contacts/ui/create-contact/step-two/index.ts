@@ -1,2 +1,1 @@
-export {StepTwo} from "./step-two";
-
+export { StepTwo } from "./step-two-contacts";

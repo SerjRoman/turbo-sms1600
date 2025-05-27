@@ -1,64 +1,64 @@
-import { TouchableOpacity, View, Image, Text, Button } from "react-native";
-import { Input } from "../../../../../shared/ui/input";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Get } from "../../../../../shared/api/get";
+import { View, Text, Alert, TouchableOpacity, Image } from "react-native";
+import { useState, useEffect } from "react";
+import { Input } from "../../../../../shared/ui/input/input";
+import { Controller, useForm } from "react-hook-form";
+import { ApiClient } from "../../../../../shared/api";
 import { IUser } from "../../../../auth/types";
+import { Button } from "../../../../../shared/ui/button";
+
+type InputContact = {
+	username: string;
+};
 
 export function StepOne() {
-	const [image, setImage] = useState<string>("");
-	const [value, setValue] = useState<string>("");
-	const [foundUser, setFoundUser] = useState<IUser | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [error, setError] = useState<string | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const [username, setUsername] = useState("");
+	const [error, setError] = useState<string | undefined>(undefined)
+	const [foundUser, setFoundUser] = useState<null | IUser>(null)
 
-	useEffect(() => {
-		async function getUser() {
-			setIsLoading(true);
-			setError(null);
-			const response = await Get<IUser>({ endpoint: `/users/${value}` });
-			if (response.status === "failure") {
-				switch (response.code) {
+	useEffect(()=>{
+		async function getUser(){
+			setIsLoading(true)
+			setError(undefined)
+
+			const response = await ApiClient.Get<IUser>({endpoint: `/users/${username}`})
+
+			if (response.status == "failure"){
+				switch(response.code){
 					case 404:
-						setError("User not found");
-						break;
+						setError("User not found")
 					default:
-						setError("Network error");
+						setError("Network error")
 				}
-				return;
+				return
 			}
-			setFoundUser(response.data);
+			setFoundUser(response.data)
 		}
-		// setTimeout(()=> {
-		//     const response = await GET()
-		// }, 500)
-	}, [value]);
+		getUser()
+	}, [username])
+
 	return (
 		<View>
-			<Input
-				label="Username"
-				placeholder="Username"
-				defaultValue={value}
-				onChangeText={(text) => {
-					setValue(text);
-				}}
-			/>
-			{foundUser ? (
-				<View>
-					<Image
-						source={
-							{ uri: foundUser.avatar }
-							// : require("../../../../shared/ui/images/boy.png") //antoshka
-						}
-						style={{}}
+			<View>
+				<Text>Username</Text>
+				<View >
+					<Input
+						value={username}
+						onChangeText={(text)=>{
+							setUsername(text)
+						}}
+						placeholder="Enter username"
+						errMsg={error}
+						autoCapitalize="none"
+						autoCorrect={false}
 					/>
-					<Text>Username</Text>
 				</View>
-			) : (
-				<Text>{error}</Text>
-			)}
-
-			<Button disabled={foundUser ? false : true} title="Select"></Button>
+			</View>
+			<View>
+                <Image/>
+                <Text></Text> 
+			</View>
+            <Button label="Select"/>
 		</View>
 	);
 }
