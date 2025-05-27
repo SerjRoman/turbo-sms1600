@@ -48,10 +48,6 @@ export const styles = StyleSheet.create({
     },
     imageIcon: {
         position: "absolute",
-        flex: 1,
-        width: "100%",
-        height: "100%",
-        opacity: "50%",
         flexDirection: "column",
         alignItems: "center"
     }

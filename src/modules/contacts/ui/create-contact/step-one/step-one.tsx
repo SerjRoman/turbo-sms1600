@@ -5,60 +5,69 @@ import { Controller, useForm } from "react-hook-form";
 import { ApiClient } from "../../../../../shared/api";
 import { IUser } from "../../../../auth/types";
 import { Button } from "../../../../../shared/ui/button";
+import { styles } from "./step-one.styles";
+import { ICONS } from "../../../../../shared/ui/icons";
 
-type InputContact = {
-	username: string;
-};
 
 export function StepOne() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [username, setUsername] = useState("");
-	const [error, setError] = useState<string | undefined>(undefined)
-	const [foundUser, setFoundUser] = useState<null | IUser>(null)
+	const [error, setError] = useState<string | undefined>(undefined);
+	const [foundUser, setFoundUser] = useState<null | IUser>(null);
 
-	useEffect(()=>{
-		async function getUser(){
-			setIsLoading(true)
-			setError(undefined)
+	useEffect(() => {
+		async function getUser() {
+			setIsLoading(true);
+			setError(undefined);
 
-			const response = await ApiClient.Get<IUser>({endpoint: `/users/${username}`})
+			const response = await ApiClient.Get<IUser>({
+				endpoint: `/users/${username}`,
+			});
 
-			if (response.status == "failure"){
-				switch(response.code){
+			if (response.status == "failure") {
+				switch (response.code) {
 					case 404:
-						setError("User not found")
+						setError("User not found");
 					default:
-						setError("Network error")
+						setError("Network error");
 				}
-				return
+				return;
 			}
-			setFoundUser(response.data)
+			setFoundUser(response.data);
 		}
-		getUser()
-	}, [username])
+		getUser();
+	}, [username]);
 
 	return (
-		<View>
-			<View>
-				<Text>Username</Text>
-				<View >
-					<Input
-						value={username}
-						onChangeText={(text)=>{
-							setUsername(text)
-						}}
-						placeholder="Enter username"
-						errMsg={error}
-						autoCapitalize="none"
-						autoCorrect={false}
+		<View style={styles.container}>
+			<View style={styles.blockSearchUser}>
+				<Input
+					iconLeft={<ICONS.SearchIcon height={16} width={16} />}
+					style={styles.inputSearch}
+					label="Username"
+					value={username}
+					onChangeText={(text) => {
+						setUsername(text);
+					}}
+					placeholder="Enter username"
+					autoCapitalize="none"
+					autoCorrect={false}
+				/>
+			</View>
+			{foundUser ? (
+				<View style={styles.blockFoundUser}>
+					<Image
+						source={{ uri: foundUser.avatar }}
+						style={styles.avatar}
 					/>
+					<Text style={styles.foundUserUsername}>
+						{foundUser.username}
+					</Text>
 				</View>
-			</View>
-			<View>
-                <Image/>
-                <Text></Text> 
-			</View>
-            <Button label="Select"/>
+			) : (
+				<Text style={styles.error}>{error}</Text>
+			)}
+			<Button label="Select" />
 		</View>
 	);
 }

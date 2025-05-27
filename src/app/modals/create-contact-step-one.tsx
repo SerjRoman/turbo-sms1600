@@ -4,7 +4,7 @@ import { StepOne } from "../../modules/contacts/ui";
 
 export default function CreateContactStepOne(){
     return (
-        <View>
+        <View style={{flex: 1}}>
             <StepOne/>
         </View>
     )
