@@ -1,5 +1,5 @@
 export interface IContact {
-    username: string;
+    name: string;
     surname: string;
     avatar: string;
 }

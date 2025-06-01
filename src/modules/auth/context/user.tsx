@@ -3,7 +3,7 @@ import { Result } from "../../../shared/types/api";
 import { IUser } from "../types";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useAuth } from "../hooks/useAuth";
+// import { useAuth } from "../hooks/useAuth";
 
 interface IUserContext {
 	user: IUser | null;
@@ -26,17 +26,7 @@ export function useUserContext() {
 export function UserContextProvider({ children }: { children: ReactNode }) {
 	const [user, setUser] = useState<IUser | null>(null);
 	const [token, setToken] = useState<string | null>(null);
-	const { getUser } = useAuth();
-	useEffect(() => {
-		const fetchUser = async () => {
-			const token = await AsyncStorage.getItem("token");
-			if (token) {
-				setToken(token);
-				await getUser();
-			}
-		};
-		fetchUser();
-	});
+
 
 	function isAuthenticated() {
 		return !!user;

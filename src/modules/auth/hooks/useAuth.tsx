@@ -1,7 +1,7 @@
 import { ApiClient } from "../../../shared/api";
 import { useUserContext } from "../context/user";
 import { ILogin, Register, IUser } from "../types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function useAuth() {
@@ -13,7 +13,7 @@ export function useAuth() {
 		if (!token) return;
 		setIsLoading(true);
 		const result = await ApiClient.Get<IUser>({
-			endpoint: "/users/me/",
+			endpoint: "/api/users/me/",
 			token: token,
 		});
 		setIsLoading(false);
@@ -28,6 +28,7 @@ export function useAuth() {
 				default:
 					setError("Network error");
 			}
+            console.log(result)
 			return;
 		}
 		setUser(result.data);
@@ -36,7 +37,7 @@ export function useAuth() {
 	async function login(credentials: ILogin) {
 		setIsLoading(true);
 		const result = await ApiClient.Post<string>({
-			endpoint: "/users/login/",
+			endpoint: "/api/users/login/",
 			body: credentials,
 		});
 		setIsLoading(false);
@@ -51,6 +52,7 @@ export function useAuth() {
 				default:
 					setError("Network error");
 			}
+            console.log(result)
 			return;
 		}
 		setToken(result.data);
@@ -60,7 +62,7 @@ export function useAuth() {
 	async function register(credentials: Register) {
 		setIsLoading(true);
 		const result = await ApiClient.Post<string>({
-			endpoint: "/users/register/",
+			endpoint: "/api/users/register/",
 			body: credentials,
 		});
 		setIsLoading(false);
@@ -75,12 +77,24 @@ export function useAuth() {
 				default:
 					setError("Network error");
 			}
+            console.log(result)
 			return;
 		}
 		setToken(result.data);
 		await AsyncStorage.setItem("token", String(token))
 	}
 
+    useEffect(() => {
+		const fetchUser = async () => {
+			const token = await AsyncStorage.getItem("token");
+			if (token) {
+				setToken(token);
+				await getUser();
+			}
+		};
+		fetchUser();
+	}, []);
+	
 	return {
 		getUser,
 		login,

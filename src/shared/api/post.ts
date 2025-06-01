@@ -19,7 +19,7 @@ export async function Post<T>(options: IPostRequest): Promise<Result<T>> {
 		const response = await fetch(`${API_URL}${endpoint}`, {
 			method: "POST",
 			headers: requestHeaders,
-			body: body,
+			body: JSON.stringify(body),
 		});
 		const result = await response.json();
 		const resultWithCode: Result<T> = {

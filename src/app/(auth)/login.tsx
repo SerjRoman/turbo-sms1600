@@ -23,7 +23,11 @@ export default function Login() {
 				<Text style={{ color: COLORS.grey }}>
 					Already have an account?
 				</Text>
-				<Link href={"/register/step-one"} style={{ color: COLORS.pinkPrimary }}>
+				<Link
+					href={"/register/step-one"}
+					style={{ color: COLORS.pinkPrimary }}
+					replace
+				>
 					Register now
 				</Link>
 			</View>

@@ -1,19 +1,19 @@
-import { View, Text, Alert, TouchableOpacity, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import { useState, useEffect } from "react";
 import { Input } from "../../../../../shared/ui/input/input";
-import { Controller, useForm } from "react-hook-form";
+import { useRouter } from "expo-router";
 import { ApiClient } from "../../../../../shared/api";
 import { IUser } from "../../../../auth/types";
 import { Button } from "../../../../../shared/ui/button";
 import { styles } from "./step-one.styles";
 import { ICONS } from "../../../../../shared/ui/icons";
 
-
 export function StepOne() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [username, setUsername] = useState("");
 	const [error, setError] = useState<string | undefined>(undefined);
 	const [foundUser, setFoundUser] = useState<null | IUser>(null);
+	const router = useRouter();
 
 	useEffect(() => {
 		async function getUser() {
@@ -21,7 +21,7 @@ export function StepOne() {
 			setError(undefined);
 
 			const response = await ApiClient.Get<IUser>({
-				endpoint: `/users/${username}`,
+				endpoint: `/api/users/${username}`,
 			});
 
 			if (response.status == "failure") {
@@ -67,7 +67,21 @@ export function StepOne() {
 			) : (
 				<Text style={styles.error}>{error}</Text>
 			)}
-			<Button label="Select" />
+			<Button
+				onPress={() =>
+					router.push({
+						pathname: "/modals/create-contact-step-two",
+						params: {
+							id: foundUser?.id,
+							name: foundUser?.name,
+							surname: foundUser?.surname,
+							avatar: foundUser?.avatar,
+						},
+					})
+				}
+				label="Select"
+				disabled={!!foundUser}
+			/>
 		</View>
 	);
 }

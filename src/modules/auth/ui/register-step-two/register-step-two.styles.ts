@@ -15,7 +15,11 @@ export const styles = StyleSheet.create({
 		fontSize: 36,
 		fontWeight: 400,
 	},
-
+    input: {
+        height: 60,
+        fontSize: 16,
+        flex: 1
+    },
 	form: {
 		gap: 20,
 		padding: 20,

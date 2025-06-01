@@ -14,4 +14,10 @@ export const styles = StyleSheet.create({
     buttonBlock: {
         alignSelf: "center",
     },
+    input: {
+        height: 60,
+        fontSize: 16,
+        flex: 1
+    }
+    
 })
