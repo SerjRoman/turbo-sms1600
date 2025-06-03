@@ -27,7 +27,6 @@ export function RegisterStepTwo() {
 	const { register } = useAuth();
 	async function onSubmit(data: IRegisterStepTwo) {
 		const result = await register({ ...params, ...data });
-		console.log(result);
 	}
 
 	return (

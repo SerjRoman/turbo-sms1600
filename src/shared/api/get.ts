@@ -14,6 +14,7 @@ export async function Get<T>(options: IGetRequest): Promise<Result<T>> {
 		requestHeaders["Authorization"] = `Bearer ${token}`;
 	}
 	try {
+        console.log(`TOKEN IS ${token}`)
 		const response = await fetch(`${API_URL}${endpoint}`, {
 			headers: requestHeaders,
             
