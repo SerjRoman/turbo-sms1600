@@ -7,26 +7,15 @@ export const styles = StyleSheet.create({
         flexDirection: "column",
         gap: 20,
         alignItems: "center",
-        paddingLeft: 10,
-        paddingRight: 10
+        paddingHorizontal: 10,
+        paddingTop: 30
     },
 
-    contactName: {
+    contactField: {
         width: "100%",
         height: 70,
-        // paddingLeft: 10,
-        // paddingRight: 10,
-        paddingTop: 30,
-        // paddingBottom: 20,  
     },
 
-    contactSurname: {
-        width: "100%",
-        height: 70,
-        // paddingLeft: 10,
-        // paddingRight: 10,
-        // paddingBottom: 20,
-    },
 
     imageUserContainer: {
         width: 201,
@@ -51,9 +40,10 @@ export const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         height: "100%",
-        opacity: "50%",
+        // opacity: "50%",
         flexDirection: "column",
         alignItems: "center"
-    }
+    },
+
 
 })
