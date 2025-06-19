@@ -18,7 +18,7 @@ function Input({
 			{label && <Text style={styles.label}>{label}</Text>}
 			<View style={[styles.inputBox, containerStyles]}>
 				{iconLeft && <View style={{ marginRight: 2 }}>{iconLeft}</View>}
-				<TextInput style={[inputStyles, styles.input]} {...props} />
+				<TextInput style={[styles.input, inputStyles]} {...props} />
 				{iconRight && (
 					<View style={{ marginLeft: "auto" }}>{iconRight}</View>
 				)}
@@ -46,7 +46,7 @@ function Password(props: Omit<IInputProps, "iconLeft" | "iconRight">) {
 				</View>
 				<TextInput
 					secureTextEntry={isHidden}
-					style={[inputStyles, styles.input]}
+					style={[styles.input, inputStyles]}
 					{...props}
 				/>
 				<View style={{ marginLeft: "auto" }}>

@@ -12,9 +12,10 @@ export function LoginForm() {
 	const { handleSubmit, control } = useForm<ILogin>({
 		defaultValues: { email: "", password: "" },
 	});
+	const { login } = useAuth();
 	async function onSubmit(data: ILogin) {
-        await useAuth().login(data)
-		console.log(data);
+		const result = await login(data);
+		console.log(result);
 	}
 	return (
 		<View style={styles.container}>
@@ -28,8 +29,8 @@ export function LoginForm() {
 					rules={{
 						required: {
 							value: true,
-							message: "Email is required"
-						}
+							message: "Email is required",
+						},
 					}}
 					// render - функция, которая описывает, как должно выглядеть поле
 					// field - это объект, который позволяет контролировать поле (связывает поле с формой)
@@ -47,6 +48,7 @@ export function LoginForm() {
 								// значение с которым можно работать и которое будет отображаться
 								value={field.value}
 								label="Email"
+								inputStyles={styles.input}
 								// отключает Т9
 								autoCorrect={false}
 								errMsg={fieldState.error?.message}
@@ -57,11 +59,11 @@ export function LoginForm() {
 				<Controller
 					control={control}
 					name="password"
-                    rules={{
+					rules={{
 						required: {
 							value: true,
-							message: "Password is required"
-						}
+							message: "Password is required",
+						},
 					}}
 					render={({ field, fieldState }) => {
 						return (
@@ -71,6 +73,7 @@ export function LoginForm() {
 								onChangeText={field.onChange}
 								value={field.value}
 								label="Password"
+								inputStyles={styles.input}
 								autoCorrect={false}
 								errMsg={fieldState.error?.message}
 							/>

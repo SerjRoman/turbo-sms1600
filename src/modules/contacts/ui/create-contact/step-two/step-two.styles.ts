@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 export const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -14,8 +13,15 @@ export const styles = StyleSheet.create({
     contactField: {
         width: "100%",
         height: 70,
+
+        paddingTop: 30
+
     },
 
+    contactSurname: {
+        width: "100%",
+        height: 70
+    },
 
     imageUserContainer: {
         width: 201,
@@ -23,13 +29,17 @@ export const styles = StyleSheet.create({
         flexDirection: "column",
         padding: 5,
         justifyContent: "center",
-        alignItems: "center",
-        // paddingLeft: 100.5,
-        // paddingRight: 100.5,
-    }, 
+        alignItems: "center"
+    },
 
     imageBlock: {
-        
+        width: 150,
+        height: 150
+    },
+    image: {
+        width: 150,
+        height: 150,
+        borderRadius: 25
     },
 
     imageText: {
@@ -43,7 +53,7 @@ export const styles = StyleSheet.create({
         // opacity: "50%",
         flexDirection: "column",
         alignItems: "center"
+
     },
-
-
-})
+    
+});

@@ -24,14 +24,10 @@ export function RegisterStepTwo() {
 			avatar: "",
 		},
 	});
+	const { register } = useAuth();
 	async function onSubmit(data: IRegisterStepTwo) {
-        await useAuth().register({...params, ...data})
-		console.log(params);
-		console.log(data);
+		const result = await register({ ...params, ...data });
 	}
-
-    // const [image, setImage] = useState()
-    // const 
 
 	return (
 		<View style={styles.container}>
@@ -57,6 +53,7 @@ export function RegisterStepTwo() {
 								onChangeText={field.onChange}
 								value={field.value}
 								autoCorrect={false}
+								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
 							/>
 						);
@@ -74,6 +71,7 @@ export function RegisterStepTwo() {
 								onChangeText={field.onChange}
 								value={field.value}
 								autoCorrect={false}
+								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
 							/>
 						);
@@ -90,21 +88,37 @@ export function RegisterStepTwo() {
 										const images = await pickImage({
 											mediaTypes: "images",
 											allowsEditing: false,
-											allowsMultipleSelection: true,
+											allowsMultipleSelection: false,
 											selectionLimit: 1,
 											base64: true,
 										});
 										if (!images) return;
 										if (!images[0].base64) return;
 										// Boolean(undefined, null ) -> false: not false -> true
-										setValue("avatar", images[0].base64);
-                                        // field.onChange()
+										setValue(
+											"avatar",
+											"data:image/png;base64," +
+												images[0].base64
+										);
+										// field.onChange()
 									}}
 									style={styles.button}
 								>
-									<IMAGES.LogoImage style={styles.image} />
+									{field.value ? (
+										<Image
+											source={{ uri: field.value }}
+											resizeMode={"cover"}
+											style={styles.image}
+										/>
+									) : (
+										<IMAGES.LogoImage
+											style={styles.image}
+											resizeMode={"cover"}
+										/>
+									)}
+
 									<ICONS.SearchIcon style={styles.icon} />
-                                    {/* проверка через field */ }
+									{/* проверка через field */}
 								</TouchableOpacity>
 							);
 						}}

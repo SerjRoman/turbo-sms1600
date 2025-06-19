@@ -14,7 +14,6 @@ export default function Register() {
             <RegisterStepTwo />
             <View
                 style={{
-                    flex: 0.5,
                     backgroundColor: "#fff",
                     alignItems: "center",
                     justifyContent: "center",
@@ -24,7 +23,7 @@ export default function Register() {
                 <Text style={{ color: COLORS.grey }}>
                     Already have an account?
                 </Text>
-                <Link href={"/login"} style={{ color: COLORS.pinkPrimary }}>Login now</Link>
+                <Link href={"/login"} style={{ color: COLORS.pinkPrimary }} replace>Login now</Link>
             </View>
         </SafeAreaView>
     );

@@ -1,1 +1,1 @@
-export { StepTwo } from "./step-two-contacts";
+export { StepTwo } from "./step-two";

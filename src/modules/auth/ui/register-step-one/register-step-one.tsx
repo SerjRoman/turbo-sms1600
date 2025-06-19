@@ -6,10 +6,12 @@ import { useForm, Controller } from "react-hook-form";
 import { IRegisterStepOne } from "../../types";
 import { styles } from "./register-step-one.styles";
 import { useRouter } from "expo-router";
+import { useAuth } from "../../hooks";
 
 export function RegisterStepOne() {
     // useRouter - возвращает объект Router, который дает возможность направлять(навигация) пользователя по экранам 
 	const router = useRouter();
+	const {register} = useAuth()
 	const { handleSubmit, control } = useForm<IRegisterStepOne>({
 		defaultValues: {
 			email: "",
@@ -50,6 +52,7 @@ export function RegisterStepOne() {
 								value={field.value}
 								label="Email"
 								autoCorrect={false}
+								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
 							/>
 						);
@@ -76,6 +79,7 @@ export function RegisterStepOne() {
 								value={field.value}
 								label="Username"
 								autoCorrect={false}
+								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
 							/>
 						);
@@ -99,6 +103,7 @@ export function RegisterStepOne() {
 								value={field.value}
 								label="Password"
 								autoCorrect={false}
+								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
 							/>
 						);
@@ -123,6 +128,7 @@ export function RegisterStepOne() {
 								value={field.value}
 								label="Confirm password"
 								autoCorrect={false}
+								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
 							/>
 						);
