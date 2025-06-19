@@ -6,14 +6,13 @@ export const styles = StyleSheet.create({
         flexDirection: "column",
         gap: 20,
         alignItems: "center",
-        paddingHorizontal: 10,
-        paddingTop: 30
+        paddingLeft: 10,
+        paddingRight: 10
     },
 
-    contactField: {
+    contactName: {
         width: "100%",
         height: 70,
-
         paddingTop: 30
 
     },
@@ -47,13 +46,8 @@ export const styles = StyleSheet.create({
     },
     imageIcon: {
         position: "absolute",
-        flex: 1,
-        width: "100%",
-        height: "100%",
-        // opacity: "50%",
         flexDirection: "column",
         alignItems: "center"
-
     },
     
 });
