@@ -22,6 +22,12 @@ export default function LayoutModal() {
 						header: () => <HeaderBack title="Create Contact" />,
 					}}
 				/>
+                <Stack.Screen
+					name="create-chat"
+					options={{
+						header: () => <HeaderBack.WithSearchInput title="Create Chat" />,
+					}}
+				/>
 			</Stack>
 		</SafeAreaView>
 	);

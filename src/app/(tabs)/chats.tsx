@@ -1,6 +1,5 @@
-import {Text} from "react-native"
- 
-export default function Chats(){
-    return (<Text>never</Text>)
-    
+import { ChatList } from "../../modules/chats/ui";
+
+export default function Chats() {
+	return <ChatList />;
 }
