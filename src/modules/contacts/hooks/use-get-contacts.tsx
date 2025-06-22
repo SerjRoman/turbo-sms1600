@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { IContact, IUser } from "../../auth/types";
+import { IUser } from "../../auth/types";
 import { useContactsService } from "../services/contacts";
+import { Contact } from "../types/contact";
 
 export function useGetContacts() {
-    const [contactsList, setContactsList] = useState<IUser[]>([]);
+    const [contactsList, setContactsList] = useState<Contact[]>([]);
     const { contacts, isLoading } = useContactsService();
 
     useEffect(() => {

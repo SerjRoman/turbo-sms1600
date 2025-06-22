@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
         padding: 10,
     },
     blockFoundUser: {
-        marginLeft: "auto",
         width: 200,
         height: 200,
         justifyContent: "center",

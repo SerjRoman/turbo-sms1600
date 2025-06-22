@@ -9,9 +9,9 @@ import { useRouter } from "expo-router";
 import { useAuth } from "../../hooks";
 
 export function RegisterStepOne() {
-    // useRouter - возвращает объект Router, который дает возможность направлять(навигация) пользователя по экранам 
+	// useRouter - возвращает объект Router, который дает возможность направлять(навигация) пользователя по экранам
 	const router = useRouter();
-	const {register} = useAuth()
+	const { register } = useAuth();
 	const { handleSubmit, control } = useForm<IRegisterStepOne>({
 		defaultValues: {
 			email: "",
@@ -21,10 +21,10 @@ export function RegisterStepOne() {
 		},
 	});
 	function onSubmit(data: IRegisterStepOne) {
-        const {confirmPassword, ...otherData} = data
-        // Если хотим передать параметры при навигации на след экран
-        // Тогда передаем объект с обязательным свойством pathname(ссылка) и свойством params: объект ваших параметров
-		router.navigate({pathname: "/register/step-two", params: otherData});
+		const { confirmPassword, ...otherData } = data;
+		// Если хотим передать параметры при навигации на след экран
+		// Тогда передаем объект с обязательным свойством pathname(ссылка) и свойством params: объект ваших параметров
+		router.navigate({ pathname: "/register/step-two", params: otherData });
 		console.log(data);
 	}
 
@@ -54,6 +54,7 @@ export function RegisterStepOne() {
 								autoCorrect={false}
 								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
+								autoCapitalize="none"
 							/>
 						);
 					}}
@@ -65,6 +66,14 @@ export function RegisterStepOne() {
 						required: {
 							value: true,
 							message: "Username is required",
+						},
+						minLength: {
+							value: 8,
+							message: "This field should be >= 8 characters",
+						},
+						maxLength: {
+							value: 60,
+							message: "This field should be <= 60 characters",
 						},
 					}}
 					render={({ field, fieldState }) => {
@@ -81,6 +90,7 @@ export function RegisterStepOne() {
 								autoCorrect={false}
 								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
+								autoCapitalize="none"
 							/>
 						);
 					}}
@@ -91,6 +101,14 @@ export function RegisterStepOne() {
 						required: {
 							value: true,
 							message: "Password is required",
+						},
+						minLength: {
+							value: 8,
+							message: "This field should be >= 8 characters",
+						},
+						maxLength: {
+							value: 60,
+							message: "This field should be <= 60 characters",
 						},
 					}}
 					name="password"
@@ -105,6 +123,7 @@ export function RegisterStepOne() {
 								autoCorrect={false}
 								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
+								autoCapitalize="none"
 							/>
 						);
 					}}
@@ -116,7 +135,14 @@ export function RegisterStepOne() {
 							value: true,
 							message: "Password is required",
 						},
-                        
+						minLength: {
+							value: 8,
+							message: "This field should be >= 8 characters",
+						},
+						maxLength: {
+							value: 60,
+							message: "This field should be <= 60 characters",
+						},
 					}}
 					name="confirmPassword"
 					render={({ field, fieldState }) => {
@@ -130,6 +156,7 @@ export function RegisterStepOne() {
 								autoCorrect={false}
 								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
+								autoCapitalize="none"
 							/>
 						);
 					}}

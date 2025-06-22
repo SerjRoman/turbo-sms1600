@@ -7,6 +7,8 @@ import { IUser } from "../../../../auth/types";
 import { Button } from "../../../../../shared/ui/button";
 import { styles } from "./step-one.styles";
 import { ICONS } from "../../../../../shared/ui/icons";
+import { useUserContext } from "../../../../auth/context";
+import { IMAGE_URL } from "../../../../../shared/constants";
 
 export function StepOne() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -14,22 +16,28 @@ export function StepOne() {
 	const [error, setError] = useState<string | undefined>(undefined);
 	const [foundUser, setFoundUser] = useState<null | IUser>(null);
 	const router = useRouter();
+	const { token } = useUserContext();
 
 	useEffect(() => {
 		async function getUser() {
+            setFoundUser(null)
+			if (!token) return;
+			if (!username) return;
 			setIsLoading(true);
 			setError(undefined);
-
 			const response = await ApiClient.Get<IUser>({
 				endpoint: `/api/users/${username}`,
+				token,
 			});
 
 			if (response.status == "failure") {
 				switch (response.code) {
 					case 404:
 						setError("User not found");
+						break
 					default:
 						setError("Network error");
+						break
 				}
 				return;
 			}
@@ -57,7 +65,7 @@ export function StepOne() {
 			{foundUser ? (
 				<View style={styles.blockFoundUser}>
 					<Image
-						source={{ uri: foundUser.avatar }}
+						source={{ uri: `${IMAGE_URL}/${foundUser.avatar}` }}
 						style={styles.avatar}
 					/>
 					<Text style={styles.foundUserUsername}>
@@ -80,7 +88,7 @@ export function StepOne() {
 					})
 				}
 				label="Select"
-				disabled={!!foundUser}
+				disabled={!foundUser}
 			/>
 		</View>
 	);

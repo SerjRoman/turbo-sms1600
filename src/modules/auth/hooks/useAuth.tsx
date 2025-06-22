@@ -4,6 +4,7 @@ import { ILogin, Register, IUser } from "../types";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
+import { Alert } from "react-native";
 
 export function useAuth() {
 	const { user, token, setUser, setToken } = useUserContext();
@@ -80,6 +81,7 @@ export function useAuth() {
 					setError("Network error");
 			}
 			console.log(result);
+
 			return;
 		}
 		setToken(result.data);
@@ -87,7 +89,7 @@ export function useAuth() {
 	}
 
 	useEffect(() => {
-        // console.log(token)
+		// console.log(token)
 		const fetchUser = async () => {
 			const token = await AsyncStorage.getItem("token");
 			if (token) {
@@ -103,6 +105,17 @@ export function useAuth() {
 		router.replace("/chats");
 	}, [user]);
 
+	useEffect(() => {
+		if (!error) return;
+		Alert.alert("Authentiticate Error", error, [
+			{
+				text: "Ok",
+				onPress: () => {
+					setError(null);
+				},
+			},
+		]);
+	}, [error]);
 	return {
 		getUser,
 		login,

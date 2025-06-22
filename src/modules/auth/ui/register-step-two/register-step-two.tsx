@@ -40,10 +40,15 @@ export function RegisterStepTwo() {
 					control={control}
 					name="name"
 					rules={{
+                        // .max(30, "This field should be <= 30 characters")
 						required: {
 							value: true,
 							message: "Name is required",
 						},
+						maxLength:{
+							value:30,
+							message: "This field should be <= 30 characters"
+						}
 					}}
 					render={({ field, fieldState }) => {
 						return (
@@ -55,6 +60,7 @@ export function RegisterStepTwo() {
 								autoCorrect={false}
 								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
+								autoCapitalize="none"
 							/>
 						);
 					}}
@@ -62,6 +68,16 @@ export function RegisterStepTwo() {
 				<Controller
 					control={control}
 					name="surname"
+                    rules={{
+                        required:{
+							value: true,
+							message: "Surname is required"
+                        },
+						maxLength:{
+							value:30,
+							message: "This field should be <= 30 characters"
+						}
+                    }}
 					// я вважаю, що прізвище не обов'язкове 😤
 					render={({ field, fieldState }) => {
 						return (
@@ -73,6 +89,7 @@ export function RegisterStepTwo() {
 								autoCorrect={false}
 								inputStyles={styles.input}
 								errMsg={fieldState.error?.message}
+								autoCapitalize="none"
 							/>
 						);
 					}}

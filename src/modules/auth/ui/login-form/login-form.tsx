@@ -52,6 +52,7 @@ export function LoginForm() {
 								// отключает Т9
 								autoCorrect={false}
 								errMsg={fieldState.error?.message}
+								autoCapitalize="none"
 							/>
 						);
 					}}
@@ -63,6 +64,14 @@ export function LoginForm() {
 						required: {
 							value: true,
 							message: "Password is required",
+						},
+						minLength: {
+							value: 8,
+							message: "This field should be >= 8 characters",
+						},
+						maxLength: {
+							value: 60,
+							message: "This field should be <= 60 characters",
 						},
 					}}
 					render={({ field, fieldState }) => {
@@ -76,6 +85,7 @@ export function LoginForm() {
 								inputStyles={styles.input}
 								autoCorrect={false}
 								errMsg={fieldState.error?.message}
+								autoCapitalize="none"
 							/>
 						);
 					}}

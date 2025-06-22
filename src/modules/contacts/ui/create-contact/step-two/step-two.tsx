@@ -5,9 +5,11 @@ import { ApiClient } from "../../../../../shared/api";
 import { Input } from "../../../../../shared/ui/input/input";
 import { SearchIcon } from "../../../../../shared/ui/icons/icons";
 import { Controller, useForm } from "react-hook-form";
-import { IContact, IUser } from "../../../../../modules/auth/types/index";
-import { Button } from "../../../../../shared/ui/button/button";
-import { useLocalSearchParams } from "expo-router";
+import { Button } from "../../../../../shared/ui/button";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { IContactForm } from "./step-two-types";
+import { IMAGE_URL } from "../../../../../shared/constants";
+import { useUserContext } from "../../../../auth/context";
 
 export function StepTwo() {
 	const prevParams = useLocalSearchParams<{
@@ -16,25 +18,33 @@ export function StepTwo() {
 		surname: string;
 		avatar: string;
 	}>();
-
-	const { control, handleSubmit } = useForm<IContact>({
+	const { token } = useUserContext();
+	const router = useRouter();
+	const { control, handleSubmit } = useForm<IContactForm>({
 		defaultValues: {
 			name: prevParams.name,
 			surname: prevParams.surname,
 			avatar: prevParams.avatar,
 		},
 	});
-	const onSubmit = async (data: IContact) => {
+	const onSubmit = async (data: IContactForm) => {
+		if (!token) return;
 		const body = {
-			contactId: prevParams.id,
+			contactUserId: prevParams.id,
 			localName: data.name + " " + data.surname,
 			avatar: data.avatar,
 		};
 		const result = await ApiClient.Post({
 			endpoint: "/api/contacts/create",
+			token,
 			body,
 		});
 		console.log(result);
+		if (result.status == "success") {
+			router.replace("/contacts");
+			return;
+		}
+        Alert.alert(result.message ? result.message : 'Unhadled error')
 	};
 
 	return (
@@ -48,6 +58,11 @@ export function StepTwo() {
 							value: true,
 							message: "Name is required",
 						},
+						// .max(30, "This field should be <= 30 characters")
+						maxLength: {
+							value: 30,
+							message: "This field should be <= 30 characters",
+						},
 					}}
 					render={({ field, fieldState }) => {
 						return (
@@ -58,6 +73,7 @@ export function StepTwo() {
 								onChangeText={field.onChange}
 								value={field.value}
 								errMsg={fieldState.error?.message}
+								inputStyles={styles.input}
 							/>
 						);
 					}}
@@ -70,6 +86,10 @@ export function StepTwo() {
 							value: true,
 							message: "Surname is required",
 						},
+						maxLength: {
+							value: 30,
+							message: "This field should be <= 30 characters",
+						},
 					}}
 					render={({ field, fieldState }) => {
 						return (
@@ -80,6 +100,7 @@ export function StepTwo() {
 								onChangeText={field.onChange}
 								value={field.value}
 								errMsg={fieldState.error?.message}
+								inputStyles={styles.input}
 							/>
 						);
 					}}
@@ -93,7 +114,6 @@ export function StepTwo() {
 					render={({ field }) => {
 						return (
 							<TouchableOpacity
-								style={styles.imageBlock}
 								onPress={async () => {
 									const images = await pickImage({
 										selectionLimit: 1,
@@ -105,7 +125,9 @@ export function StepTwo() {
 										Alert.alert("Image is required");
 										return;
 									}
-									const image = "data:image/png;base64," + images[0].base64;
+									const image =
+										"data:image/png;base64," +
+										images[0].base64;
 									if (!image) {
 										Alert.alert(
 											"Error occured. Try again."
@@ -117,29 +139,28 @@ export function StepTwo() {
 							>
 								<Image
 									style={styles.image}
-									source={{ uri: field.value }}
+									source={{
+										uri: field.value.startsWith(
+											"data:image/png;base64,"
+										)
+											? field.value
+											: `${IMAGE_URL}/${field.value}`,
+									}}
 								/>
-								<SearchIcon style={styles.imageIcon} />
+								<SearchIcon
+									style={styles.imageIcon}
+									width={34}
+									height={34}
+								/>
 							</TouchableOpacity>
 						);
 					}}
 				/>
-				<View style={styles.imageBlock}>
-					{" "}
-					<View style={styles.imageIcon}>
-						<SearchIcon />
-					</View>{" "}
-				</View>
 
 				<Text style={styles.imageText}>Upload photo</Text>
 			</View>
 
-			<View>
-				<Button
-					onPress={handleSubmit(onSubmit)}
-					label={"Add contact"}
-				/>
-			</View>
+			<Button onPress={handleSubmit(onSubmit)} label={"Add contact"} />
 		</View>
 	);
 }

@@ -1,2 +1,2 @@
 export { COLORS } from "./colors";
-export { API_URL } from "./api-url";
+export { API_URL, WS_API_URL, IMAGE_URL } from "./api-url";
