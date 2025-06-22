@@ -1,11 +1,12 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Header } from "../../../../shared/ui/header";
 import { IMAGES } from "../../../../shared/ui/images";
 import { ICONS } from "../../../../shared/ui/icons";
 import { Input } from "../../../../shared/ui/input";
-
+import { useRouter } from "expo-router";
 
 export function HeaderChats() {
+    const router = useRouter();
 	return (
 		<Header
 			title="Chats"
@@ -20,9 +21,13 @@ export function HeaderChats() {
 				</View>
 			}
 			headerRight={
-				<View>
+				<TouchableOpacity
+                onPress={()=>{
+                    router.push("/modals/create-chat")
+                }}
+                >
 					<ICONS.PlusIcon width={40} height={40} />
-				</View>
+				</TouchableOpacity>
 			}
 			headerBottom={
 				<View

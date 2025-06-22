@@ -14,7 +14,7 @@ export default function TabsLayout() {
             edges={["top"]}
         >
             <Tabs
-                initialRouteName="chats"
+                initialRouteName={"chats/chats"}
                 screenOptions={{
                     tabBarStyle: {
                         backgroundColor: COLORS.bisqueSecondary,
@@ -38,7 +38,7 @@ export default function TabsLayout() {
                     }}
                 />
                 <Tabs.Screen
-                    name={"chats"}
+                    name={"chats/chats"}
                     options={{
                         tabBarIcon: () => {
                             return <ICONS.ChatsIcon width={20} height={20} />;
