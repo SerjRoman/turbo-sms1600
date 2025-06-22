@@ -1,21 +1,18 @@
 import { useEffect, useState } from "react";
-import { IContact } from "../../auth/types";
-import { contactsService } from "../services/contacts";
+import { IContact, IUser } from "../../auth/types";
+import { useContactsService } from "../services/contacts";
 
 export function useGetContacts() {
-    const [isLoading, setIsLoading] = useState(false);
-    const [contacts, setContacts] = useState<IContact[]>([]);
+    const [contactsList, setContactsList] = useState<IUser[]>([]);
+    const { contacts, isLoading } = useContactsService();
+
     useEffect(() => {
         const fetchContacts = async () => {
-            setIsLoading(true);
-            try {
-                const contacts = await contactsService.contacts();
-                setContacts(contacts);
-            } finally {
-                setIsLoading(false);
-            }
+            const list = await contacts();
+            setContactsList(list);
         };
         fetchContacts();
     }, []);
-    return { contacts, isLoading, setContacts };
+
+    return { contactsList, isLoading };
 }
