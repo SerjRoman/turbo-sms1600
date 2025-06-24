@@ -1,20 +1,27 @@
+
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../../../shared/constants";
 
 export const styles = StyleSheet.create({
-	container: {
+	contactList: {
 		flex: 1,
-		paddingTop: 30,
-        backgroundColor:COLORS.white,
-	},
-
-	item: {
+		padding: 5,
 		backgroundColor: COLORS.white,
-		padding: 20,
+	},
+	item: {
+		width: "100%",
+		alignItems: "center",
+		flexDirection: "row",
+		backgroundColor: COLORS.white,
+		gap: 5,
+		padding: 5,
 		borderBottomColor: COLORS.grey,
-        borderBottomWidth:2
+		borderBottomWidth: 2,
 	},
 	title: {
-		fontSize: 32,
+		fontSize: 22,
+	},
+	avatar: {
+		borderRadius: 9999,
 	},
 });

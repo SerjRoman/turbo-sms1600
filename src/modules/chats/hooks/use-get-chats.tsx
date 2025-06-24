@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { IUser } from "../../auth/types";
+import { ChatWithRelations } from "../types/chat";
+import { useChatsService } from "../services/chats";
 
 export function useGetChats() {
 	const [isLoading, setIsLoading] = useState(false);
-	const [chats, setChats] = useState<IUser[]>([]);
+	const [chats, setChats] = useState<ChatWithRelations[]>([]);
+	const { getChats } = useChatsService();
 	useEffect(() => {
 		const fetchChats = async () => {
 			setIsLoading(true);
 			try {
-				// const chats = await friendsService.allFriends();
+				const chats = await getChats();
 				setChats(chats);
 			} finally {
 				setIsLoading(false);

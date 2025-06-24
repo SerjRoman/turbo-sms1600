@@ -1,32 +1,47 @@
-import { FlatList } from "react-native";
+import { FlatList, View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from "./list.styles";
+import { useUserContext } from "../../../auth/context";
+import { IMAGE_URL } from "../../../../shared/constants";
+import { useGetChats } from "../../hooks/use-get-chats";
+import { ChatWithRelations } from "../../types/chat";
+import { useSocketContext } from "../../../../shared/context/socket";
 
 export function ChatList() {
-	// const { socket } = useSocketContext();
-	// useEffect(() => {
-	// 	if (!socket) return;
-	// 	socket.on("new-message", () => {
-	// 		console.log("received new message");
-	// 	});
-	// 	return () => {
-	// 		socket.off("new-message");
-	// 	};
-	// }, [socket]);
+	const { chats } = useGetChats();
+	const { user } = useUserContext();
+	const { socket } = useSocketContext();
+	const Item = ({ chat }: { chat: ChatWithRelations }) => (
+		<TouchableOpacity
+			onPress={() => {
+				if (!socket) return;
+				socket.emit("joinChat", { chatId: chat.id }, (data: any) => {
+					console.log(data);
+				});
+			}}
+		>
+			<View style={styles.item}>
+				{/* <Image
+				source={{ uri: IMAGE_URL + "/" + chat.avatar }}
+				style={styles.avatar}
+				width={50}
+				height={50}
+			/> */}
+				<Text style={styles.title}>
+					{
+						chat.participants.find((item) => {
+							return item.userId != user?.id;
+						})?.userId
+					}
+				</Text>
+			</View>
+		</TouchableOpacity>
+	);
 	return (
 		<FlatList
-			style={styles.chatList}
-			data={undefined}
-			renderItem={undefined}
+			contentContainerStyle={styles.chatList}
+			data={chats}
+			renderItem={({ item }) => <Item key={item.id} chat={item} />}
+			keyExtractor={(item) => item.id.toString()}
 		></FlatList>
-		// <>
-		// 	<Button
-		// 		label="Send join event"
-		// 		onPress={() => {
-		// 			socket?.emit("joinChat", { chatId: 5 }, () =>
-		// 				console.log("Response from server")
-		// 			);
-		// 		}}
-		// 	/>
-		// </>
 	);
 }
