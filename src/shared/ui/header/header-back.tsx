@@ -91,3 +91,66 @@ function WithSearchInput(props: IHeaderProps) {
 }
 
 HeaderBack.WithSearchInput = WithSearchInput;
+
+
+function Chat(props: IHeaderProps) {
+	const { title, ...otherProps } = props;
+	const router = useRouter();
+	return (
+		<Header
+			headerLeft={
+				<TouchableOpacity
+					style={{
+						flexDirection: "row",
+						gap: 3,
+						alignItems: "center",
+					}}
+					onPress={() => {
+						if (router.canGoBack()) router.back();
+					}}
+				>
+					<ICONS.BackIcon
+						width={16}
+						height={16}
+						fill={COLORS.pinkPrimary}
+					/>
+					<Text style={{ color: COLORS.pinkPrimary, fontSize: 22 }}>
+						Back
+					</Text>
+				</TouchableOpacity>
+			}
+            headerRight={
+                <View
+                style={{
+                    borderRadius: 9999,
+                    width: 50,
+                    height: 50,
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    justifyContent: "center",
+                    backgroundColor: COLORS.pinkPrimary
+                }}
+                >
+                    <Text>Avatar</Text>
+                </View>
+            }
+			headerBottom={
+				<View
+					style={{
+						height: 32,
+						borderRadius: 16,
+                        justifyContent: "center",
+                        alignItems: "center"
+					}}
+				>
+					<Text>Last Seen At</Text>
+				</View>
+			}
+			title={title}
+			{...otherProps}
+		/>
+	);
+}
+
+HeaderBack.Chat = Chat;

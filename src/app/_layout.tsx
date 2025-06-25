@@ -16,7 +16,7 @@ export default function RootLayout() {
 					options={{
 						headerShown: false,
 					}}
-				></Stack.Screen>
+				/>
 				<Stack.Screen
 					name="modals"
 					options={{
