@@ -5,11 +5,13 @@ import { IMAGE_URL } from "../../../../shared/constants";
 import { useGetChats } from "../../hooks/use-get-chats";
 import { ChatWithRelations } from "../../types/chat";
 import { useSocketContext } from "../../../../shared/context/socket";
+import { useRouter } from "expo-router";
 
 export function ChatList() {
 	const { chats } = useGetChats();
 	const { user } = useUserContext();
 	const { socket } = useSocketContext();
+    const router = useRouter()
 	const Item = ({ chat }: { chat: ChatWithRelations }) => (
 		<TouchableOpacity
 			onPress={() => {
@@ -17,6 +19,8 @@ export function ChatList() {
 				socket.emit("joinChat", { chatId: chat.id }, (data: any) => {
 					console.log(data);
 				});
+                router.push(`/${chat.id}`)
+                console.log(chat.id)
 			}}
 		>
 			<View style={styles.item}>
