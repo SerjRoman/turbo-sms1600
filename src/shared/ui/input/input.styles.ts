@@ -3,7 +3,7 @@ import { COLORS } from "../../constants";
 
 export const styles = StyleSheet.create({
 	inputBox: {
-		height:"auto",
+		height: "auto",
 		flexDirection: "row",
 		alignItems: "center",
 		paddingHorizontal: 10,
@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
 		borderColor: COLORS.black,
 	},
 
-    searchInputBox: {
-        height:"auto",
+	searchInputBox: {
+		height: "auto",
 		flexDirection: "row",
 		alignItems: "center",
 		paddingHorizontal: 10,
@@ -22,13 +22,13 @@ export const styles = StyleSheet.create({
 		backgroundColor: COLORS.grey,
 		borderWidth: 1,
 		borderColor: COLORS.black,
-    },
+	},
 
 	input: {
-        flex: 1,
-        height: '100%',
-		width: '100%'
-    },
+		flex: 1,
+		height: "100%",
+		width: "100%",
+	},
 	label: {
 		fontWeight: 500,
 		fontSize: 16,

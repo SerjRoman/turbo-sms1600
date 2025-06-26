@@ -1,4 +1,11 @@
-import { FlatList, View, Text, TouchableOpacity, Image, Alert } from "react-native";
+import {
+	FlatList,
+	View,
+	Text,
+	TouchableOpacity,
+	Image,
+	Alert,
+} from "react-native";
 import { useGetContacts } from "../../../contacts/hooks/use-get-contacts";
 import { styles } from "./add-chat.style";
 import { Contact } from "../../../contacts/types/contact";
@@ -12,8 +19,9 @@ import { useRouter } from "expo-router";
 export function AddChat() {
 	const { contactsList } = useGetContacts();
 	const { token } = useUserContext();
-	const router = useRouter()
+	const router = useRouter();
 	const handleAddChat = async (contactId: number) => {
+        console.log(contactId)
 		if (!token) return;
 		const resp = await ApiClient.Post<Chat>({
 			endpoint: "/api/chats/create",
@@ -24,10 +32,10 @@ export function AddChat() {
 		});
 		console.log("response", resp);
 		if (resp.status === "failure") {
-			Alert.alert("Failed to create chat", resp.message)
-			return
+			Alert.alert("Failed to create chat", resp.message);
+			return;
 		}
-		router.back()
+		router.back();
 	};
 
 	const Item = ({ contact }: { contact: Contact }) => (

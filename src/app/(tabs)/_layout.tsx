@@ -6,6 +6,7 @@ import { HeaderProfile } from "../../modules/profile/ui";
 import { HeaderChats } from "../../modules/chats/ui";
 import { HeaderSettings } from "../../modules/settings/ui";
 import { HeaderContacts } from "../../modules/contacts/ui";
+import { HeaderBack } from "../../shared/ui/header";
 
 export default function TabsLayout() {
 	return (
@@ -45,6 +46,17 @@ export default function TabsLayout() {
 						},
 						tabBarLabel: "Chats",
 						header: () => <HeaderChats />,
+					}}
+				/>
+				<Tabs.Screen
+					name={"chat/[id]"}
+					options={{
+						tabBarLabel: "Chats",
+						header: () => <HeaderBack.Chat title={"Chat"}/>,
+						href: null,
+						tabBarStyle: {
+							display: "none"
+						}
 					}}
 				/>
 				<Tabs.Screen

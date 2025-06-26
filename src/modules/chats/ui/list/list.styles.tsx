@@ -18,9 +18,16 @@ export const styles = StyleSheet.create({
 		borderBottomWidth: 2,
 	},
 	title: {
-		fontSize: 22,
+		fontSize: 20,
 	},
 	avatar: {
 		borderRadius: 9999,
 	},
+    previewText: {
+        fontSize: 14,
+        color: "rgba(0, 0, 0, 0.5)"
+    },
+    chatTitleBlock: {
+
+    }
 });

@@ -2,11 +2,14 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "../../../../shared/constants";
 
 export const styles = StyleSheet.create({
-	main: {
+	container: {
 		flex: 1,
+		backgroundColor: COLORS.bisquePrimary,
 	},
-	keyboardAvoidingView: {
-		flex: 1,
+	main: {
+		flexGrow: 1,
+		backgroundColor: COLORS.white,
+		gap: 10,
 	},
 	bottom: {
 		flexDirection: "row",
@@ -16,13 +19,22 @@ export const styles = StyleSheet.create({
 		backgroundColor: COLORS.bisquePrimary,
 	},
 	input: {
-		// flex: 1,
 		width: 280,
 		fontSize: 16,
 		backgroundColor: COLORS.darkMmm,
-		paddingHorizontal: 10,
-		borderRadius: 8,
-		marginHorizontal: 8,
+		borderRadius: 16,
 		height: 40,
+		padding: 5,
+	},
+	message: {
+		backgroundColor: "#DDD2C7",
+		width: "auto",
+		height: "auto",
+		borderTopLeftRadius: 10,
+		borderTopRightRadius: 10,
+		paddingHorizontal: 5,
+		gap: 5,
+		borderBottomLeftRadius: 10,
+		maxWidth: 350,
 	},
 });

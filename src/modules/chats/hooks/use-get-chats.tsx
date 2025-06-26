@@ -5,6 +5,7 @@ import { useChatsService } from "../services/chats";
 export function useGetChats() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [chats, setChats] = useState<ChatWithRelations[]>([]);
+
 	const { getChats } = useChatsService();
 	useEffect(() => {
 		const fetchChats = async () => {
@@ -18,5 +19,5 @@ export function useGetChats() {
 		};
 		fetchChats();
 	}, []);
-	return { chats, isLoading, setChats };
+	return { chats, isLoading };
 }

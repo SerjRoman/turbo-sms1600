@@ -4,8 +4,9 @@ import { styles } from "./header.styles";
 import { Header } from "./header";
 import { ICONS } from "../icons";
 import { COLORS } from "../../constants";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Input } from "../input";
+import { useSocketContext } from "../../context/socket";
 
 export function HeaderBack(props: IHeaderProps) {
 	const { title, ...otherProps } = props;
@@ -92,10 +93,11 @@ function WithSearchInput(props: IHeaderProps) {
 
 HeaderBack.WithSearchInput = WithSearchInput;
 
-
 function Chat(props: IHeaderProps) {
 	const { title, ...otherProps } = props;
 	const router = useRouter();
+	const { id } = useLocalSearchParams();
+	const { socket } = useSocketContext();
 	return (
 		<Header
 			headerLeft={
@@ -106,7 +108,10 @@ function Chat(props: IHeaderProps) {
 						alignItems: "center",
 					}}
 					onPress={() => {
-						if (router.canGoBack()) router.back();
+						if (router.canGoBack()) {
+							socket?.emit("leaveChat", { chatId: +id });
+							router.back();
+						}
 					}}
 				>
 					<ICONS.BackIcon
@@ -119,29 +124,29 @@ function Chat(props: IHeaderProps) {
 					</Text>
 				</TouchableOpacity>
 			}
-            headerRight={
-                <View
-                style={{
-                    borderRadius: 9999,
-                    width: 50,
-                    height: 50,
-                    alignSelf: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    justifyContent: "center",
-                    backgroundColor: COLORS.pinkPrimary
-                }}
-                >
-                    <Text>Avatar</Text>
-                </View>
-            }
+			headerRight={
+				<View
+					style={{
+						borderRadius: 25,
+						width: 50,
+						height: 50,
+						alignSelf: "center",
+						alignItems: "center",
+						alignContent: "center",
+						justifyContent: "center",
+						backgroundColor: COLORS.pinkPrimary,
+					}}
+				>
+					<Text>Avatar</Text>
+				</View>
+			}
 			headerBottom={
 				<View
 					style={{
 						height: 32,
 						borderRadius: 16,
-                        justifyContent: "center",
-                        alignItems: "center"
+						justifyContent: "center",
+						alignItems: "center",
 					}}
 				>
 					<Text>Last Seen At</Text>

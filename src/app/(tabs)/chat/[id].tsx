@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { Chat } from "../../modules/chats/ui";
+import { Chat } from "../../../modules/chats/ui";
 
 export default function ChatRoute(){
     return (

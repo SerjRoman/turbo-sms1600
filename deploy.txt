@@ -1,0 +1,31 @@
+1. Заходимо в документацію https://docs.expo.dev/build/setup/
+ 2. Реєструємо аккаунт EAS(Expo)
+ 3. Скачуємо npm install -g eas-cli
+ 4. Логінимось eas login
+ 5. Пернеміщаємо змінні окруженія в dotenv
+ 6. Змінити(по бажаню, бажано) app.json зовнішній вигляд
+ 7. В плагіни(app.json) указати пермішини 
+ 8. eas build:configure - создает файл конфиг для билда
+ 9. npx expo install expo-dev-client
+ 10. Білд вилитьтить з помилкою! 
+ 11. npx expo install --check
+ 12. Перевірити, що немає ніяк помилок в коді!!!
+ 13. Переходимо в priew(eas.json) і указуємо ... нище
+
+
+.aab/.apk - .aab для play store, .apk для android
+
+
+
+ После всего:
+
+ eas build -p(--platform) android(all | ios) - для генерации production build(который пойдет в Google Play Store) === eas build -p android --profile production
+
+Для генерации apk в eas.json -> 
+"preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+ eas build -p android --profile preview - для генерации preview(apk)
