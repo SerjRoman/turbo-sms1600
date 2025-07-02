@@ -1,23 +1,26 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ChatWithRelations } from "../types/chat";
 import { useChatsService } from "../services/chats";
+import { useFocusEffect } from "expo-router";
 
 export function useGetChats() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [chats, setChats] = useState<ChatWithRelations[]>([]);
 
 	const { getChats } = useChatsService();
-	useEffect(() => {
-		const fetchChats = async () => {
-			setIsLoading(true);
-			try {
-				const chats = await getChats();
-				setChats(chats);
-			} finally {
+	useFocusEffect(
+		useCallback(() => {
+			const fetchChats = async () => {
+				setIsLoading(true);
+				const fetchedChats = await getChats();
+				setChats(fetchedChats);
 				setIsLoading(false);
-			}
-		};
-		fetchChats();
-	}, []);
+			};
+
+			fetchChats();
+
+			return () => {};
+		}, [])
+	);
 	return { chats, isLoading };
 }

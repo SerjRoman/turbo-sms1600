@@ -12,7 +12,6 @@ import { Contact } from "../../../contacts/types/contact";
 import { IMAGE_URL } from "../../../../shared/constants";
 import { ApiClient } from "../../../../shared/api";
 import { useUserContext } from "../../../auth/context";
-import { Result } from "../../../../shared/types/api";
 import { Chat } from "../../types/chat";
 import { useRouter } from "expo-router";
 
@@ -21,7 +20,7 @@ export function AddChat() {
 	const { token } = useUserContext();
 	const router = useRouter();
 	const handleAddChat = async (contactId: number) => {
-        console.log(contactId)
+		console.log(contactId);
 		if (!token) return;
 		const resp = await ApiClient.Post<Chat>({
 			endpoint: "/api/chats/create",
@@ -39,7 +38,7 @@ export function AddChat() {
 	};
 
 	const Item = ({ contact }: { contact: Contact }) => (
-		<TouchableOpacity onPress={() => handleAddChat(contact.id)}>
+		<TouchableOpacity onPress={() => handleAddChat(contact.contactUserId)}>
 			<View style={styles.item}>
 				<Image
 					source={{ uri: IMAGE_URL + "/" + contact.avatar }}

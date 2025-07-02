@@ -1,10 +1,8 @@
 import { FlatList, View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from "./list.styles";
-import { useUserContext } from "../../../auth/context";
 import { IMAGE_URL } from "../../../../shared/constants";
 import { useGetChats } from "../../hooks/use-get-chats";
 import { ChatWithRelations } from "../../types/chat";
-import { useSocketContext } from "../../../../shared/context/socket";
 import { useRouter } from "expo-router";
 
 export function ChatList() {
@@ -55,6 +53,7 @@ export function ChatList() {
 		<FlatList
 			contentContainerStyle={styles.chatList}
 			data={chats}
+            extraData={chats}
 			renderItem={({ item }) => <Item key={item.id} chat={item} />}
 			keyExtractor={(item) => item.id.toString()}
 		></FlatList>

@@ -13,32 +13,39 @@ import { Input } from "../../../../shared/ui/input";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSocketContext } from "../../../../shared/context/socket";
 import { useEffect, useState } from "react";
-import { Message } from "../../types/message";
 import { ChatWithMessagesAndParticipants } from "../../types/chat";
+import { Message } from "../../types/message";
 
 export function Chat() {
-	const router = useRouter();
 	const { socket } = useSocketContext();
 	const [message, setMessage] = useState<string>("");
 	const [chat, setChat] = useState<ChatWithMessagesAndParticipants>();
 	const { id } = useLocalSearchParams();
 	useEffect(() => {
 		if (!socket) return;
+
 		socket.emit("joinChat", { chatId: +id }, (data: any) => {
-			if (data.status == "success") {
+			if (data.status === "success") {
 				setChat(data.data);
 			}
 		});
 
-		socket.on("newMessage", (data) => {
-			// console.log(data)
-			if (!chat) return;
-			setChat({ ...chat, messages: [...chat.messages, data] });
-		});
-	}, [socket]);
-	useEffect(() => {
-		console.log(chat);
-	}, [chat]);
+		const handleNewMessage = (newMessageData: Message) => {
+			setChat((prevChat) => {
+				if (!prevChat) return prevChat;
+				return {
+					...prevChat,
+					messages: [...prevChat.messages, newMessageData],
+				};
+			});
+		};
+
+		socket.on("newMessage", handleNewMessage);
+
+		return () => {
+			socket.off("newMessage", handleNewMessage);
+		};
+	}, [socket, id]);
 	return (
 		<SafeAreaView style={styles.container} edges={["bottom"]}>
 			<KeyboardAvoidingView
